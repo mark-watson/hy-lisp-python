@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Testing Jinja2 and Flask with the Hy language</title>
+  </head>
+  <body>
+     {% if name %}
+       <h1>Hello {{name}}</h1>
+     {% else %}
+       <h1>Hey, please enter your name!</h1>
+     {% endif %}
+    
+    <form method="POST" action="/response">
+      Name: <input type="text" name="name" required>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
