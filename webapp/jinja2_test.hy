@@ -12,8 +12,6 @@
   (defn response []
     (setv name (request.form.get "name"))
     (print name)
-    (setv result request.form)
-    (print result)
     (render_template "template1.j2" :name name)))
 
 (app.run)
