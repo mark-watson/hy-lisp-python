@@ -22,7 +22,6 @@
 (print "corpus length:" (len text))
 
 (setv chars (sorted (list (set text))))
-;;(.insert chars 0 "~") ;; to avoid zero cut, add a character not appearing in text
 (print "total chars (unique characters in input text):" (len chars))
 (setv char_indices (dict (lfor i (enumerate chars) (, (last i) (first i)))))
 (setv indices_char (dict (lfor i (enumerate chars) i)))
@@ -38,17 +37,12 @@
   (.append sentences (cut text i (+ i maxlen)))
   (.append next_chars (get text (+ i maxlen))))
 
-(print "next_chars:" next_chars)
 (print "Vectorization...")
 (setv x (np.zeros [(len sentences) maxlen (len chars)] :dtype np.bool))
 (setv y (np.zeros [(len sentences) (len chars)] :dtype np.bool))
 (for [[i sentence] (lfor j (enumerate sentences) j)]
   (for [[t char] (lfor j (enumerate sentence) j)]
-    ;;(print "i:" i "t:" t "char:" char)
-    ;;(print "(get char_indices char):" (get char_indices char))
-    ;;(if (> (get char_indices char) 0)
     (setv (get x i t (get char_indices char)) 1))
-        ;;(setv (get x i t 0) 1)))
   (setv (cut y i (get char_indices (get next_chars i))) 1))
 
 (print "x:\n" x)
