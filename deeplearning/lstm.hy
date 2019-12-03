@@ -43,10 +43,10 @@
 (for [[i sentence] (lfor j (enumerate sentences) j)]
   (for [[t char] (lfor j (enumerate sentence) j)]
     (setv (get x i t (get char_indices char)) 1))
-  (setv (cut y i (get char_indices (get next_chars i))) 1))
+  (setv (get y i (get char_indices (get next_chars i))) 1))
 
-(print "x:\n" x)
-;;(print "y:\n" y)
+;;(print "x:\n" x)
+(print "y:\n" y)
 
 (print "Done creating training data.")
 
