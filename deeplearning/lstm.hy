@@ -26,5 +26,5 @@
 (setv char_indices (dict (lfor i (enumerate chars) (, (last i) (first i)))))
 (setv indices_char (dict (lfor i (enumerate chars) i)))
 
-(print char_indices)
-(print indices_char)
+(print "char_indices:\n" char_indices)
+(print "indices_char:\n" indices_char)
