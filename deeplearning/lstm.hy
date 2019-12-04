@@ -44,9 +44,14 @@
   (for [[t char] (lfor j (enumerate sentence) j)]
     (setv (get x i t (get char_indices char)) 1))
   (setv (get y i (get char_indices (get next_chars i))) 1))
+(print "Done creating one-hot encoded training data.")
 
-;;(print "x:\n" x)
-(print "y:\n" y)
+(print "Builing model...")
+(setv model (Sequential))
+(.add model (LSTM 128 :input_shape [maxlen (len chars)]))
+(.add model (Dense (len chars) :activation "softmax"))
 
-(print "Done creating training data.")
+(setv optimizer (RMSprop 0.01))
+(.compile model :loss "categorical_crossentropy" :optimizer optimizer)
+
 
