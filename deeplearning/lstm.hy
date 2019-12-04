@@ -66,8 +66,27 @@
   (print)
   (print "----- Generating text after Epoch:" epoch)
   (setv start_index (random.randint 0 (- (len(text) maxlen 1))))
-  (for [diversity in [0.2 0.5 1.0 1.2]]
+  (for [diversity [0.2 0.5 1.0 1.2]]
     (print "----- diversity:" diversity)
     (setv generated "")
-    
+    (setv sentence (cut text start_index (+ start_index maxlen)))
+    (setv generated (+ generated sentence))
+    (print "----- Generating with seed:" sentence)
+    (sys.stdout.write generated)
+    (for [i (range 400)]
+      (setv x_pred (np.zeros [1 maxlen (len chars)]))
+      (for [[t char] (lfor j (enumerate sentence) j)]
+        (setv (get x_pred i t (get char_indices char)) 1))
+      (setv preds (first (model.predict x_pred :verbose 0)))
+      (setv next_index (sample preds diversity))
+      (setv next_char (get indices_char next_index))
+      (setv sentence (+ (rest sentence) next_char))
+      (sys.stdout.write next_char)
+      (sys.stdout.flush))
+    (print)))
+
+(setv print_callback (LambdaCallback :on_epoch_end on_epoch_end))
+
+(model.fit x y :batch_size 128 :epochs 60 :callbacks [print_callback])
+
         
