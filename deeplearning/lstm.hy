@@ -54,4 +54,20 @@
 (setv optimizer (RMSprop 0.01))
 (.compile model :loss "categorical_crossentropy" :optimizer optimizer)
 
+(defn sample [preds &optional [temperature 1.0]]
+  (setv preds (.astype (np.array preds) "float64"))
+  (setv preds (/ (np.log preds) temperature))
+  (setv exp_preds (np.exp preds))
+  (setv preds (/ exp_preds (np.sum exp_preds)))
+  (setv probas (np.random.multinomial 1 preds 1))
+  (np.argmax probas))
 
+(defn on_epoch_end [epoch &optional not-used]
+  (print)
+  (print "----- Generating text after Epoch:" epoch)
+  (setv start_index (random.randint 0 (- (len(text) maxlen 1))))
+  (for [diversity in [0.2 0.5 1.0 1.2]]
+    (print "----- diversity:" diversity)
+    (setv generated "")
+    
+        
