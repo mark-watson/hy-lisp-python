@@ -18,7 +18,7 @@
 
 (with [f (io.open path :encoding "utf-8")]
   (setv text (.read f))) ;; note: sometimes we use (.lower text) to
-;;       convert text to all lower case
+                         ;;       convert text to all lower case
 (print "corpus length:" (len text))
 
 (setv chars (sorted (list (set text))))
