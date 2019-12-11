@@ -6,7 +6,7 @@
   (setv [conn cursor] (connection-and-cursor "hybook" "markw"))
   (query cursor "CREATE TABLE people (name TEXT, email TEXT);")
   (conn.commit)
-  (query cursor "INSERT INTO people VALUES ('Mark', 'mark@markwatson.com')")
+  (query cursor "INSERT INTO people VALUES ('Mark',  'mark@markwatson.com')")
   (query cursor "INSERT INTO people VALUES ('Kiddo', 'kiddo@markwatson.com')")
   (conn.commit)
   (query cursor "SELECT * FROM people")
