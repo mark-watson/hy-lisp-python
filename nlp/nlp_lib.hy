@@ -1,19 +1,18 @@
 #!/usr/bin/env hy
 
 (import argparse os)
-(import spacy neuralcoref)
 
-(setv nlp2 (spacy.load "en"))
-(neuralcoref.add_to_pipe nlp2)
+(import spacy)
+
+(setv nlp-model (spacy.load "en"))
 
 (defn nlp [some-text]
-  (setv doc (nlp2 some-text))
-  { "corefs" doc._.coref_resolved
-    "clusters" doc._.coref_clusters
-    "scores" doc._.coref_scores
-  }
-  )
-
+  (setv doc (nlp-model some-text))
+  (setv entities (lfor entity doc.ents [entity.text entity.label_]))
+  (setv j (doc.to_json))
+  (setv (get j "entities") entities)
+  j)
+ 
 ;; tests:
 (print (nlp "President George Bush went to Mexico and he had a very good meal"))
 (print (nlp "Lucy threw a ball to Bill and he caught it"))
