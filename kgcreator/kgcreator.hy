@@ -23,14 +23,22 @@
                            "in directory" directory-name)))))))))
 
 (defn process-file [txt-path meta-path frdf fcypher]
+  
   (defn read-data [text-path meta-path]
     (with [f (open text-path)] (setv t1 (.read f)))
     (with [f (open meta-path)] (setv t2 (.read f)))
     [t1 t2])
-
+  
+  (defn modify-entity-names [ename]
+    (.replace ename "the " ""))
+  
   (setv [txt meta] (read-data txt-path meta-path))
   (print txt meta)
   (setv entities (find-entities-in-text txt))
+  (setv entities ;; only operate on a few entity types
+        (lfor [e t] entities
+              :if (in t ["NORP" "ORG" "PRODUCT" "GPE" "PERSON" "LOC"])
+              [(modify-entity-names e) t]))
   (Data2Rdf txt meta entities frdf)
   (Data2Neo4j txt meta entities fcypher))
         
@@ -41,3 +49,5 @@
 
 
 (process-directory "test_data" "output.rdf" "output.cypher")
+
+(setv v [["European" "NORP"] ["Portuguese" "NORP"] ["Banco Espirito Santo SA" "ORG"] ["last\nweek" "DATE"] ["Banco Espirito\n" "ORG"] ["December" "DATE"] ["The Wall\nStreet Journal" "ORG"] ["Thursday" "DATE"] ["Banco Espirito Santo's" "ORG"] ["Cole" "PRODUCT"] ["IBM" "ORG"] ["Canada" "GPE"] ["France" "GPE"] ["the Australian Broadcasting Corporation" "ORG"] ["Australian Broadcasting Corporation" "ORG"] ["Story" "PERSON"] ["Frank Munoz" "PERSON"] ["the Australian Writers Guild" "ORG"] ["the American University" "ORG"]])
