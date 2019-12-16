@@ -5,6 +5,7 @@
 
 (import [data2neo4j [Data2Neo4j]])
 (import [data2rdf [Data2Rdf]])
+(import [text2semantics [find-entities-in-text]])
 
 (defn process-directory [directory-name output-rdf output-cypher]
   (with [frdf (open output-rdf "w")]
@@ -29,8 +30,9 @@
 
   (setv [txt meta] (read-data txt-path meta-path))
   (print txt meta)
-  (Data2Rdf txt meta frdf)
-  (Data2Neo4j txt meta fcypher))
+  (setv entities (find-entities-in-text txt))
+  (Data2Rdf txt meta entities frdf)
+  (Data2Neo4j txt meta entities fcypher))
         
 (defn read-dataXX [text-path meta-path]
   (with [f (open text-path)] (setv t1 (.read f)))
