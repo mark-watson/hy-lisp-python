@@ -42,10 +42,6 @@
   (Data2Rdf txt meta entities frdf)
   (Data2Neo4j txt meta entities fcypher))
         
-(defn read-dataXX [text-path meta-path]
-  (with [f (open text-path)] (setv t1 (.read f)))
-  (with [f (open meta-path)] (setv t2 (.read f)))
-  [t1 t2])
 
 
 (process-directory "test_data" "output.rdf" "output.cypher")
