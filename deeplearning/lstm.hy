@@ -32,7 +32,7 @@
 (setv sentences (list))
 (setv next_chars (list))
 
-(print "Create sentencs and next_chars data...")
+(print "Create sentences and next_chars data...")
 (for [i (range 0 (- (len text) maxlen) step)]
   (.append sentences (cut text i (+ i maxlen)))
   (.append next_chars (get text (+ i maxlen))))
