@@ -10,7 +10,8 @@
   (defn clean [s]
     (.strip (.replace s "\n" " ")))
   (setv doc (nlp-model some-text))
-  (map set (lfor entity doc.ents [(clean entity.text) entity.label_])))
+  (map list (lfor entity doc.ents [(clean entity.text) entity.label_])))
  
-;;(print (find-entities-in-text "President George Bush went to Mexico and he had a very good meal"))
+;;(for [e (find-entities-in-text "President George Bush went to Mexico and he had a very good meal")]
+;;  (print e))
 ;;(print (find-entities-in-text "Lucy threw a ball to Bill and he caught it"))

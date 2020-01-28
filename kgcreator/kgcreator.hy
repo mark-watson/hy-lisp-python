@@ -7,22 +7,21 @@
 (import [data2rdf [Data2Rdf]])
 (import [text2semantics [find-entities-in-text]])
 
-(defn process-directory [directory-name output-rdf output-cypher]
+(defn process-directory [directory-name output-rdf]
   (with [frdf (open output-rdf "w")]
-    (with [fcypher (open output-cypher "w")]
-      (with [entries (scandir directory-name)]
-        (for [entry entries]
-          ;;(print entry.path)
-          (setv [_ file-extension] (splitext entry.name))
-          (if (= file-extension ".txt")
-              (do
-                (setv check-file-name (+ (cut entry.path 0 -4) ".meta"))
-                (if (exists check-file-name)
-                    (process-file entry.path check-file-name frdf fcypher)
-                    (print "Warning: no .meta file for" entry.path
-                           "in directory" directory-name)))))))))
+    (with [entries (scandir directory-name)]
+      (for [entry entries]
+        ;;(print entry.path)
+        (setv [_ file-extension] (splitext entry.name))
+        (if (= file-extension ".txt")
+            (do
+              (setv check-file-name (+ (cut entry.path 0 -4) ".meta"))
+              (if (exists check-file-name)
+                  (process-file entry.path check-file-name frdf)
+                  (print "Warning: no .meta file for" entry.path
+                         "in directory" directory-name))))))))
 
-(defn process-file [txt-path meta-path frdf fcypher]
+(defn process-file [txt-path meta-path frdf]
   
   (defn read-data [text-path meta-path]
     (with [f (open text-path)] (setv t1 (.read f)))
@@ -39,11 +38,10 @@
         (lfor [e t] entities
               :if (in t ["NORP" "ORG" "PRODUCT" "GPE" "PERSON" "LOC"])
               [(modify-entity-names e) t]))
-  (Data2Rdf txt meta entities frdf)
-  (Data2Neo4j txt meta entities fcypher))
+  (Data2Rdf meta entities frdf))
         
 
 
-(process-directory "test_data" "output.rdf" "output.cypher")
+(process-directory "test_data" "output.rdf")
 
-(setv v [["European" "NORP"] ["Portuguese" "NORP"] ["Banco Espirito Santo SA" "ORG"] ["last\nweek" "DATE"] ["Banco Espirito\n" "ORG"] ["December" "DATE"] ["The Wall\nStreet Journal" "ORG"] ["Thursday" "DATE"] ["Banco Espirito Santo's" "ORG"] ["Cole" "PRODUCT"] ["IBM" "ORG"] ["Canada" "GPE"] ["France" "GPE"] ["the Australian Broadcasting Corporation" "ORG"] ["Australian Broadcasting Corporation" "ORG"] ["Story" "PERSON"] ["Frank Munoz" "PERSON"] ["the Australian Writers Guild" "ORG"] ["the American University" "ORG"]])
+;;(setv v [["European" "NORP"] ["Portuguese" "NORP"] ["Banco Espirito Santo SA" "ORG"] ["last\nweek" "DATE"] ["Banco Espirito\n" "ORG"] ["December" "DATE"] ["The Wall\nStreet Journal" "ORG"] ["Thursday" "DATE"] ["Banco Espirito Santo's" "ORG"] ["Coke" "PRODUCT"] ["IBM" "ORG"] ["Canada" "GPE"] ["France" "GPE"] ["the Australian Broadcasting Corporation" "ORG"] ["Australian Broadcasting Corporation" "ORG"] ["Story" "PERSON"] ["Frank Munoz" "PERSON"] ["the Australian Writers Guild" "ORG"] ["the American University" "ORG"]])
