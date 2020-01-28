@@ -2,16 +2,36 @@
 
 (import [os [scandir]])
 (import [os.path [splitext exists]])
+(import spacy)
 
-(import [data2neo4j [Data2Neo4j]])
-(import [data2rdf [Data2Rdf]])
-(import [text2semantics [find-entities-in-text]])
+(setv nlp-model (spacy.load "en"))
+
+(defn find-entities-in-text [some-text]
+  (defn clean [s]
+    (.strip (.replace s "\n" " ")))
+  (setv doc (nlp-model some-text))
+  (map list (lfor entity doc.ents [(clean entity.text) entity.label_])))
+
+(defn Data2Rdf [meta-data entities fout]
+  (for [[value abreviation] entities]
+    (if (in abreviation e2umap)
+      (.write fout (+ "<" meta-data ">\t" (get e2umap abreviation) "\t" "\"" value "\"" " .\n"))))
+  )
+
+(setv e2umap {
+  "ORG" "<https://schema.org/Organization>"
+  "LOC" "<https://schema.org/location>"
+  "GPE" "<https://schema.org/location>"
+  "NORP" "<https://schema.org/nationality>"
+  "PRODUCT" "<https://schema.org/Product>"
+  "PERSON" "<https://schema.org/Person>"
+})
+
 
 (defn process-directory [directory-name output-rdf]
   (with [frdf (open output-rdf "w")]
     (with [entries (scandir directory-name)]
       (for [entry entries]
-        ;;(print entry.path)
         (setv [_ file-extension] (splitext entry.name))
         (if (= file-extension ".txt")
             (do
@@ -32,7 +52,6 @@
     (.replace ename "the " ""))
   
   (setv [txt meta] (read-data txt-path meta-path))
-  (print txt meta)
   (setv entities (find-entities-in-text txt))
   (setv entities ;; only operate on a few entity types
         (lfor [e t] entities
