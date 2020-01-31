@@ -12,7 +12,7 @@
   (setv doc (nlp-model some-text))
   (map list (lfor entity doc.ents [(clean entity.text) entity.label_])))
 
-(defn Data2Rdf [meta-data entities fout]
+(defn data2Rdf [meta-data entities fout]
   (for [[value abreviation] entities]
     (if (in abreviation e2umap)
       (.write fout (+ "<" meta-data ">\t" (get e2umap abreviation) "\t" "\"" value "\"" " .\n")))))
@@ -54,6 +54,6 @@
         (lfor [e t] entities
               :if (in t ["NORP" "ORG" "PRODUCT" "GPE" "PERSON" "LOC"])
               [(modify-entity-names e) t]))
-  (Data2Rdf meta entities frdf))
+  (data2Rdf meta entities frdf))
 
 (process-directory "test_data" "output.rdf")
