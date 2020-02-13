@@ -1,6 +1,5 @@
 #!/usr/bin/env hy
 
-(import argparse os)
 (import [get_web_page [get-raw-data-from-web]])
 
 (import [bs4 [BeautifulSoup]])

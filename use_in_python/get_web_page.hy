@@ -1,6 +1,3 @@
-#!/usr/bin/env hy
-
-(import argparse os)
 (import [urllib.request [Request urlopen]])
 
 (defn get-raw-data-from-web [aUri &optional [anAgent {"User-Agent" "HyLangBook/1.0"}]]
