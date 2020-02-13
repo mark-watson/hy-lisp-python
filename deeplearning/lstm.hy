@@ -78,6 +78,7 @@
       (for [[t char] (lfor j (enumerate sentence) j)]
         (setv (get x_pred 0 t (get char_indices char)) 1))
       (setv preds (first (model.predict x_pred :verbose 0)))
+      (print "** preds=" preds)
       (setv next_index (sample preds diversity))
       (setv next_char (get indices_char next_index))
       (setv sentence (+ (cut sentence 1) next_char))
