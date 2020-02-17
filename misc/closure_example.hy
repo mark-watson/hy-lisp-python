@@ -10,5 +10,3 @@
 (print (increment))
 (print (increment))
 (print (increment))
-
-
