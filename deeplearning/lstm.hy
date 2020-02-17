@@ -46,7 +46,7 @@
   (setv (get y i (get char_indices (get next_chars i))) 1))
 (print "Done creating one-hot encoded training data.")
 
-(print "Builing model...")
+(print "Building model...")
 (setv model (Sequential))
 (.add model (LSTM 128 :input_shape [maxlen (len chars)]))
 (.add model (Dense (len chars) :activation "softmax"))
