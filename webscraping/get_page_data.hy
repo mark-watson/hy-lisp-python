@@ -25,10 +25,4 @@
 
 (for [ta (get elements "a")] (print (get-element-data ta)))
 
-;;  (for [e body] (print (.getText e)))
-
-;; (.find_all soup "a")
-
-;; (.find_all soup "b")
-;; (for [x (.find_all soup "b")] (print (type x)))
   
