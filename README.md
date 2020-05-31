@@ -12,3 +12,5 @@ This book covers many programming topics using the Lisp language Hy that compile
 data
 - Deep Learning
 - Natural Language Processing (NLP) using Deep Learning
+
+Please note that this repo contains examples that are a work in progress for the next edition.
