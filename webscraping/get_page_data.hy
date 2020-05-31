@@ -25,4 +25,4 @@
 
 (for [ta (get elements "a")] (print (get-element-data ta)))
 
-  
+
