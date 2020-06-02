@@ -9,8 +9,6 @@
 ;; Add your Bing Search V7 subscription key and endpoint to your environment variables.
 (setv subscription_key (get os.environ "BING_SEARCH_V7_SUBSCRIPTION_KEY"))
 
-(print subscription_key)
-
 ;; Query term(s) to search for. 
 (setv query (get sys.argv 1)) ;;  "site:wikidata.org Sedona Arizona"
 
@@ -24,4 +22,33 @@
 
 ;; Call the API
 (setv response (requests.get endpoint :headers headers :params params))
-(print (response.json))
+
+(print "\nFull JSON response from Bing search query:\n")
+(pprint (response.json))
+
+;; pull out resuts and print them individually:
+
+(setv results (get (response.json) "webPages"))
+
+(print "\nResults from the key 'webPages':\n")
+(pprint results)
+
+(print "\nDetailed printout from the first search result:\n")
+
+(setv result-list (get results "value"))
+(setv first-result (first result-list))
+
+(print "\nFirst result, all data:\n")
+(pprint first-result)
+
+(print "\nSummary of first search result:\n")
+
+(pprint (get first-result "displayUrl"))
+
+(if (in "displayUrl" first-result)
+    (print (.format " key: {:15} \t:\t {}" "displayUrl" (get first-result "displayUrl"))))
+(if (in "language" first-result)
+    (print (.format " key: {:15} \t:\t {}" "language" (get first-result "language"))))
+(if (in "name" first-result)
+    (print (.format " key: {:15} \t:\t {}" "name" (get first-result "name"))))
+
