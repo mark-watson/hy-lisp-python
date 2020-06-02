@@ -13,11 +13,11 @@
   (map list (lfor entity doc.ents [(clean entity.text) entity.label_])))
 
 (defn data2Rdf [meta-data entities fout]
-  (for [[value abreviation] entities]
+  (for [[value abbreviation] entities]
     (setv a-literal (+ "\"" value "\""))
     (if (in value v2umap) (setv a-literal (get v2umap value)))
-    (if (in abreviation e2umap)
-      (.write fout (+ "<" meta-data ">\t" (get e2umap abreviation) "\t" a-literal " .\n")))))
+    (if (in abbreviation e2umap)
+      (.write fout (+ "<" meta-data ">\t" (get e2umap abbreviation) "\t" a-literal " .\n")))))
 
 (setv e2umap { ;; entity type name to URI
   "ORG" "<https://schema.org/Organization>"
