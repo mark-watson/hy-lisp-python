@@ -25,18 +25,18 @@
     (except [e Exception] (print e))))
  
 (defn fetch-result-dbpedia [query]
-  (setv results "")
+  (setv results [])
   (try
     (setv conn (connect *db-path*))
     (setv cur (conn.cursor))
     (print "check is query is cached:")
-    (setv sql (.format "select * from dbpedia where query = \"{}\";" query))
+    (setv sql (.format "select result from dbpedia where query = \"{}\";" query))
     (print ["sql:" sql])
     (cur.execute sql)
     (setv results (cur.fetchall))
     (conn.close)
     (except [e Exception] (print e)))
-  results)
+  (lfor result results (first result)))
  
 
 (create-db)
