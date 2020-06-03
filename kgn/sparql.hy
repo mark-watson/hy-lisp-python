@@ -7,7 +7,7 @@
 (import requests)
 (require [hy.contrib.walk [let]])
 
-(setv query (get sys.argv 1)) ;; "select ?s ?p ?o { ?s ?p ?o } limit 2"
+;;(setv query (get sys.argv 1)) ;; "select ?s ?p ?o { ?s ?p ?o } limit 2"
 
 (setv wikidata-endpoint "https://query.wikidata.org/bigdata/namespace/wdq/sparql")
 (setv dbpedia-endpoint "https://dbpedia.org/sparql")
@@ -38,5 +38,5 @@
 (defn dbpedia-sparql [query]
   (do-query-helper dbpedia-endpoint query))
 
-(pprint (wikidata-sparql query))
-(pprint (dbpedia-sparql query))
+;;(pprint (wikidata-sparql query))
+;;(pprint (dbpedia-sparql query))
