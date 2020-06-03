@@ -21,6 +21,7 @@
                 query result))
     (print ["sql:" sql])
     (cur.execute sql)
+    (conn.commit)
     (conn.close)
     (except [e Exception] (print e))))
  
@@ -42,3 +43,4 @@
 (create-db)
 (save-query-results-dbpedia "q1" "r1")
 (print (fetch-result-dbpedia "q1"))
+(print (fetch-result-dbpedia "q1notthere"))
