@@ -15,13 +15,18 @@
   (.split s))
 
 (defn colorize-sparql [s]
-  (let [tokens (tokenize-keep-uris s)
+  (let [tokens
+        (tokenize-keep-uris
+          (.replace (.replace (.replace s "{" " { ") "}" " } ") "." " . "))
         ret (StringIO)] ;; ret is an output stream for a string buffer
     (for [token tokens]
       (if (> (len token) 0)
           (if (= (get token 0) "?")
               (.write ret (red token))
-              (if (in token ["where" "select" "distinct" "option" "filter" "FILTER" "OPTION" "DISTINCT" "SELECT" "WHERE"])
+              (if (in
+                    token
+                    ["where" "select" "distinct" "option" "filter"
+                     "FILTER" "OPTION" "DISTINCT" "SELECT" "WHERE"])
                   (.write ret (blue token))
                   (if (= (get token 0) "<")
                       (.write ret (bold token))
@@ -31,4 +36,4 @@
     (.seek ret 0)
     (.read ret)))
 
-(print (colorize-sparql "select ?s ?p  where { ?s ?p <http://dbpedia.org/schema/Person> }"))
+(print (colorize-sparql "select ?s ?p  where {?s ?p <http://dbpedia.org/schema/Person>}."))
