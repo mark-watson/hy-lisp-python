@@ -36,4 +36,4 @@
     (.seek ret 0)
     (.read ret)))
 
-(print (colorize-sparql "select ?s ?p  where {?s ?p <http://dbpedia.org/schema/Person>}."))
+;;(print (colorize-sparql "select ?s ?p  where {?s ?p <http://dbpedia.org/schema/Person>}."))
