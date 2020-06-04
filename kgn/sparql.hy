@@ -18,16 +18,16 @@
 (defn do-query-helper [endpoint query]
   ;; check cache:
   (setv cached-results (fetch-result-dbpedia query))
-  (print "cached results:") (print cached-results)
   (if (> (len cached-results) 0)
-      (eval cached-results)
+      (let ()
+        (print "Using cached query results")
+        (eval cached-results))
       (let ()
         ;; Construct a request
         (setv params { "query" query "format" "json"})
         
         ;; Call the API
         (setv response (requests.get endpoint :params params))
-        (print "response:") (print response) (print response.status_code)
         
         (setv json-data (response.json))
         
