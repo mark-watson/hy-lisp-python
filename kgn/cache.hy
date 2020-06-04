@@ -1,7 +1,10 @@
 (import [sqlite3 [connect version Error ]])
 (import json)
+(import [os [getenv]])
+             
+(setv *db-path* (.format "{}/.kgn_hy_cache.db" (getenv "HOME")))
 
-(setv *db-path* "kgn_hy_cache.db")
+(print *db-path*)
 
 (defn create-db []
   (try
