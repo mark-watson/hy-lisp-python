@@ -5,7 +5,6 @@
 (import sys)
 (import [pprint [pprint]])
 (import requests)
-(import pickle)
 (require [hy.contrib.walk [let]])
 
 (import [cache [fetch-result-dbpedia save-query-results-dbpedia]])

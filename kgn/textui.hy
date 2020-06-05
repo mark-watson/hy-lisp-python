@@ -24,10 +24,17 @@
           )
     (prompt questions)))
 
+(defn get-query []
+  (get
+    (prompt [{"type" "input"
+              "name" "query"
+              "message" "Enter a list of entities"}])
+    "query"))
 
+;(print
+;  (select-entities
+;    [["Bill 1" "Micosoft founder.."]
+;     ["Bill 2" "Frontiesman and hunter.."]]
+;    [["IBM" "International Business Machines"]]))
 
-(print
-  (select-entities
-    [["Bill 1" "Micosoft founder.."]
-     ["Bill 2" "Frontiesman and hunter.."]]
-    [["IBM" "International Business Machines"]]))
+;(print (get-query))
