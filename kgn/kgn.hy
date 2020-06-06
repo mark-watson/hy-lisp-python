@@ -6,6 +6,8 @@
 (require [hy.contrib.walk [let]])
 
 (import [textui [select-entities get-query]])
+(import [kgnutils [dbpedia-get-entities-by-name]])
+
 (import spacy)
 
 (setv nlp-model (spacy.load "en"))
@@ -22,7 +24,16 @@
   ret)
         
 
-(print (entities-in-text "Bill Clinton, Mexico, IBM, Bill Gates, Pepsi, Canada, John Smith, Google"))
+(print (entities-in-text "Bill Clinton, Mexico, IBM, San Diego, Florida, Great Lakes, Bill Gates, Pepsi, Canada, John Smith, Google"))
+
+(setv entity-type-to-type-uri
+      {"PERSON" "<http://dbpedia.org/ontology/Person>"
+       "GPE" "<http://dbpedia.org/ontology/Place>"
+       "ORG" "<http://dbpedia.org/ontology/Organisation>"
+       })
+
+(defn shorten-comment [comment]
+  (+ (cut comment 0 70) "..."))
 
 (setv query "")
 
@@ -34,4 +45,32 @@
       (if (or (= query "quit") (= query "q"))
           (break))
       (setv elist (entities-in-text query))
-)))
+      (setv people-found-on-dbpedia [])
+      (setv places-found-on-dbpedia [])
+      (setv organizations-found-on-dbpedia [])
+      (for [key elist]
+        (print (get elist key))
+        (setv type-uri (get entity-type-to-type-uri key))
+        (for [name (get elist key)]
+          (setv dbp (dbpedia-get-entities-by-name name type-uri))
+          (print "+ dbp:") (pprint dbp)
+          (for [d dbp]
+            (setv short-comment (shorten-comment (second (second d))))
+            (print "+ short-comment") (print short-comment)
+            (if (= key "PERSON")
+                (.extend people-found-on-dbpedia [(+ name  " || " short-comment)]))
+            (if (= key "GPE")
+                (.extend places-found-on-dbpedia [(+ name  " || " short-comment)]))
+            (if (= key "ORG")
+                (.extend organizations-found-on-dbpedia [(+ name  " || " short-comment)])))))
+      (setv user-selected-entities
+            (select-entities
+              people-found-on-dbpedia
+              places-found-on-dbpedia
+              organizations-found-on-dbpedia))
+      (pprint user-selected-entities)
+      )))
+
+;; (pprint (dbpedia-get-entities-by-name "Bill Gates" "<http://dbpedia.org/ontology/Person>"))
+
+(kgn)

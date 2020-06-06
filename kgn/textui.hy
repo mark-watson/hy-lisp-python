@@ -3,14 +3,17 @@
 (import [pprint [pprint]])
 (require [hy.contrib.walk [let]])
 
-(defn select-entities [people organizations]
+(defn select-entities [people places organizations]
   (let [choices []]
     (.append choices (Separator "- People -"))
     (for [person people]
-      (.append choices { "name" (.join " " person) }))
+      (.append choices { "name" person }))
+    (.append choices (Separator "- Places -"))
+    (for [place places]
+      (.append choices { "name" place }))
     (.append choices (Separator "- Organizations -"))
     (for [org organizations]
-      (.append choices { "name" (.join " " org) }))
+      (.append choices { "name" org }))
     (setv questions
           [
            {
@@ -33,8 +36,9 @@
 
 ;(print
 ;  (select-entities
-;    [["Bill 1" "Micosoft founder.."]
-;     ["Bill 2" "Frontiesman and hunter.."]]
-;    [["IBM" "International Business Machines"]]))
+;    ["Bill 1 || Micosoft founder.."
+;     "Bill 2 || Frontiesman and hunter.."]
+;    ["Mexico || Country of Mexico"]
+;    ["IBM || International Business Machines"]))
 
 ;(print (get-query))
