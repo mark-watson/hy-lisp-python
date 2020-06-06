@@ -20,7 +20,7 @@
             "type" "checkbox"
             "qmark" "😃"
             "message" "Select entitites to process"
-            "name" "entitities"
+            "name" "entities"
             "choices" choices
             }
            ]
@@ -34,11 +34,7 @@
               "message" "Enter a list of entities"}])
     "query"))
 
-;(print
-;  (select-entities
-;    ["Bill 1 || Micosoft founder.."
-;     "Bill 2 || Frontiesman and hunter.."]
-;    ["Mexico || Country of Mexico"]
-;    ["IBM || International Business Machines"]))
+;(print (select-entities  ["Bill 1 || Micosoft founder.." "Bill 2 || Frontiesman and hunter.."]
+;    ["Mexico || Country of Mexico"] ["IBM || International Business Machines"]))
 
 ;(print (get-query))

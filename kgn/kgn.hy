@@ -24,7 +24,7 @@
   ret)
         
 
-(print (entities-in-text "Bill Clinton, Mexico, IBM, San Diego, Florida, Great Lakes, Bill Gates, Pepsi, Canada, John Smith, Google"))
+(print (entities-in-text "Bill Clinton, Canada, IBM, San Diego, Florida, Great Lakes, Bill Gates, Pepsi, John Smith, Google"))
 
 (setv entity-type-to-type-uri
       {"PERSON" "<http://dbpedia.org/ontology/Person>"
@@ -32,9 +32,15 @@
        "ORG" "<http://dbpedia.org/ontology/Organisation>"
        })
 
-(defn shorten-comment [comment]
-  (+ (cut comment 0 70) "..."))
+(setv short-comment-to-uri {})
 
+(defn shorten-comment [comment uri]
+  (setv sc (+ (cut comment 0 70) "..."))
+  (assoc short-comment-to-uri sc uri)
+  sc)
+
+;;(defn short-comment-to-uri-and-comment [user-prompt entities]
+  
 (setv query "")
 
 (defn kgn []
@@ -48,6 +54,8 @@
       (setv people-found-on-dbpedia [])
       (setv places-found-on-dbpedia [])
       (setv organizations-found-on-dbpedia [])
+      (global short-comment-to-uri)
+      (setv short-comment-to-uri {})
       (for [key elist]
         (print (get elist key))
         (setv type-uri (get entity-type-to-type-uri key))
@@ -55,7 +63,7 @@
           (setv dbp (dbpedia-get-entities-by-name name type-uri))
           (print "+ dbp:") (pprint dbp)
           (for [d dbp]
-            (setv short-comment (shorten-comment (second (second d))))
+            (setv short-comment (shorten-comment (second (second d)) (second (first d))))
             (print "+ short-comment") (print short-comment)
             (if (= key "PERSON")
                 (.extend people-found-on-dbpedia [(+ name  " || " short-comment)]))
@@ -69,6 +77,11 @@
               places-found-on-dbpedia
               organizations-found-on-dbpedia))
       (pprint user-selected-entities)
+      (setv uri-list [])
+      (for [entity (get user-selected-entities "entities")]
+        (setv short-comment (cut entity (+ 4 (.index entity " || "))))
+        (.extend uri-list [(get short-comment-to-uri short-comment)]))
+      (print "+ uri-list:") (print uri-list)
       )))
 
 ;; (pprint (dbpedia-get-entities-by-name "Bill Gates" "<http://dbpedia.org/ontology/Person>"))
