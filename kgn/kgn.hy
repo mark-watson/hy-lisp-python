@@ -7,6 +7,7 @@
 
 (import [textui [select-entities get-query]])
 (import [kgnutils [dbpedia-get-entities-by-name]])
+(import [relationships [entity-results->relationship-links]])
 
 (import spacy)
 
@@ -24,7 +25,7 @@
   ret)
         
 
-(print (entities-in-text "Bill Clinton, Canada, IBM, San Diego, Florida, Great Lakes, Bill Gates, Pepsi, John Smith, Google"))
+;;(print (entities-in-text "Bill Clinton, Canada, IBM, San Diego, Florida, Great Lakes, Bill Gates, Pepsi, John Smith, Google"))
 
 (setv entity-type-to-type-uri
       {"PERSON" "<http://dbpedia.org/ontology/Person>"
@@ -82,7 +83,9 @@
         (setv short-comment (cut entity (+ 4 (.index entity " || "))))
         (.extend uri-list [(get short-comment-to-uri short-comment)]))
       (print "+ uri-list:") (print uri-list)
-      )))
+      (setv relation-data (entity-results->relationship-links uri-list))
+      (print "\nDiscovered relationship links:")
+      (pprint relation-data))))
 
 ;; (pprint (dbpedia-get-entities-by-name "Bill Gates" "<http://dbpedia.org/ontology/Person>"))
 
