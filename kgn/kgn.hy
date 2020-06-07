@@ -45,8 +45,7 @@
 (defn kgn []
   (while
     True
-    (let [query (get-query)
-          emap {}]
+    (let [query (get-query)]
       (if (or (= query "quit") (= query "q"))
           (break))
       (setv elist (entities-in-text query))
