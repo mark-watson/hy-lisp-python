@@ -4,7 +4,7 @@
              
 (setv *db-path* (.format "{}/.kgn_hy_cache.db" (getenv "HOME")))
 
-(print *db-path*)
+;;(print *db-path*)
 
 (defn create-db []
   (try

@@ -1,15 +1,10 @@
 #!/usr/bin/env hy
 
 (import json)
-(import os)
-(import sys)
-(import [pprint [pprint]])
 (import requests)
 (require [hy.contrib.walk [let]])
 
 (import [cache [fetch-result-dbpedia save-query-results-dbpedia]])
-
-;;(setv query (get sys.argv 1)) ;; "select ?s ?p ?o { ?s ?p ?o } limit 2"
 
 (setv wikidata-endpoint "https://query.wikidata.org/bigdata/namespace/wdq/sparql")
 (setv dbpedia-endpoint "https://dbpedia.org/sparql")
@@ -50,5 +45,4 @@
 (defn dbpedia-sparql [query]
   (do-query-helper dbpedia-endpoint query))
 
-;;(pprint (wikidata-sparql query))
-(pprint (dbpedia-sparql "select ?s ?p ?o { ?s ?p ?o } limit 3"))
+;;(print (dbpedia-sparql "select ?s ?p ?o { ?s ?p ?o } limit 4"))

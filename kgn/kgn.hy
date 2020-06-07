@@ -40,8 +40,6 @@
   (assoc short-comment-to-uri sc uri)
   sc)
 
-;;(defn short-comment-to-uri-and-comment [user-prompt entities]
-  
 (setv query "")
 
 (defn kgn []
@@ -58,14 +56,11 @@
       (global short-comment-to-uri)
       (setv short-comment-to-uri {})
       (for [key elist]
-        (print (get elist key))
         (setv type-uri (get entity-type-to-type-uri key))
         (for [name (get elist key)]
           (setv dbp (dbpedia-get-entities-by-name name type-uri))
-          (print "+ dbp:") (pprint dbp)
           (for [d dbp]
             (setv short-comment (shorten-comment (second (second d)) (second (first d))))
-            (print "+ short-comment") (print short-comment)
             (if (= key "PERSON")
                 (.extend people-found-on-dbpedia [(+ name  " || " short-comment)]))
             (if (= key "GPE")
@@ -77,12 +72,10 @@
               people-found-on-dbpedia
               places-found-on-dbpedia
               organizations-found-on-dbpedia))
-      (pprint user-selected-entities)
       (setv uri-list [])
       (for [entity (get user-selected-entities "entities")]
         (setv short-comment (cut entity (+ 4 (.index entity " || "))))
         (.extend uri-list [(get short-comment-to-uri short-comment)]))
-      (print "+ uri-list:") (print uri-list)
       (setv relation-data (entity-results->relationship-links uri-list))
       (print "\nDiscovered relationship links:")
       (pprint relation-data))))

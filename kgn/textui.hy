@@ -31,6 +31,6 @@
   (get
     (prompt [{"type" "input"
               "name" "query"
-              "message" "Enter a list of entities"}])
+              "message" "Enter a list of entities:"}])
     "query"))
 

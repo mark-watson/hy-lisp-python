@@ -2,6 +2,7 @@
 (require [hy.contrib.walk [let]])
 
 (import [sparql [dbpedia-sparql]])
+(import [colorize [colorize-sparql]])
 
 ;;(import [textui [select-entities get-query]])
 
@@ -11,7 +12,9 @@
           "SELECT DISTINCT ?p {{  {} ?p {} . FILTER (!regex(str(?p), 'wikiPage', 'i')) }} LIMIT 5"
           s-uri o-uri)
         results (dbpedia-sparql query)]
-    (flatten results)))
+    (print "Generated SPARQL to get relationships between two entities:")
+    (print (colorize-sparql query))
+    (lfor r (flatten results) :if (not (= r "p")) r)))
 
 (defn entity-results->relationship-links [uris]
   (setv uris (lfor uri uris (+ "<" uri ">")))
