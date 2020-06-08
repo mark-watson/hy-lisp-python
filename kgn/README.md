@@ -1,7 +1,7 @@
 # Implementing Knowledge Graph Navigator in Hy
 
-Note: this example is under construction and will be released with the second edition
-of this book.
+Run the program:
 
-IGNORE THIS CODE, FOR NOW.
+    hy kgn.hy
 
+Enter a list of people, place, organization names when prompted. You then see a list of entities found on DBPedia. Select the entities you want more information on.
