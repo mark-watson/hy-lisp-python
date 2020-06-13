@@ -14,3 +14,7 @@ data
 - Natural Language Processing (NLP) using Deep Learning
 
 Please note that this repo contains examples that are a work in progress for the next edition.
+
+## Donate on Patreon to support all of my projects
+
+Please visit [https://www.patreon.com/markwatson](https://www.patreon.com/markwatson) and sign up to donate $1/month
