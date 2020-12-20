@@ -15,3 +15,9 @@ data
 
 Please note that this repo contains examples that are a work in progress for the next edition.
 
+## Examples converted to Python
+
+December 19, 2020: I added a shell script to convert the Hy language examples to Python and store them in examples_translated_to_python/.
+
+
+
