@@ -2,7 +2,7 @@
 
 The data file test.triples is a partial copy of a data file from the Salesforce Multi-Hop Deep Learning Graph Search project that you can find here:
 
-    [https://github.com/salesforce/MultiHopKG](https://github.com/salesforce/MultiHopKG)
+[https://github.com/salesforce/MultiHopKG](https://github.com/salesforce/MultiHopKG)
 
 Install dependencies:
 
