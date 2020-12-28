@@ -1,4 +1,4 @@
-# Unified Medical Language System (UMLS) Triple Data Graph Plot
+# Unified Medical Language System (UMLS) RDF Triple Data Graph Plot
 
 The data file test.triples is a partial copy of a data file from the Salesforce Multi-Hop Deep Learning Graph Search project that you can find here:
 
