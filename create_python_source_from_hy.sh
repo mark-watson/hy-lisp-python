@@ -19,6 +19,7 @@ hy2py3 kgn/kgnutils.hy > examples_translated_to_python/kgn/kgnutils.py
 hy2py3 kgn/sparql.hy > examples_translated_to_python/kgn/sparql.py
 hy2py3 kgn/cache.hy > examples_translated_to_python/kgn/cache.py
 hy2py3 kgn/kgn.hy > examples_translated_to_python/kgn/kgn.py
+hy2py3 kgn/textui.hy > examples_translated_to_python/kgn/textui.py
 hy2py3 kgn/relationships.hy > examples_translated_to_python/kgn/relationships.py
 cp kgn/README.md examples_translated_to_python/kgn
 
