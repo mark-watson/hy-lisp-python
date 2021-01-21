@@ -1,4 +1,3 @@
-(require [hy.contrib.walk [let]])
 (import [io [StringIO]])
 
 ;; Utilities to add ANSI terminal escape sequences to colorize text.
@@ -15,25 +14,25 @@
   (.split s))
 
 (defn colorize-sparql [s]
-  (let [tokens
+  (setv tokens
         (tokenize-keep-uris
-          (.replace (.replace (.replace s "{" " { ") "}" " } ") "." " . "))
-        ret (StringIO)] ;; ret is an output stream for a string buffer
-    (for [token tokens]
-      (if (> (len token) 0)
-          (if (= (get token 0) "?")
-              (.write ret (red token))
-              (if (in
-                    token
-                    ["where" "select" "distinct" "option" "filter"
-                     "FILTER" "OPTION" "DISTINCT" "SELECT" "WHERE"])
-                  (.write ret (blue token))
-                  (if (= (get token 0) "<")
-                      (.write ret (bold token))
-                      (.write ret token)))))
-      (if (not (= token "?"))
-          (.write ret " ")))
-    (.seek ret 0)
-    (.read ret)))
+          (.replace (.replace (.replace s "{" " { ") "}" " } ") "." " . ")))
+  (setv ret (StringIO)) ;; ret is an output stream for a string buffer
+  (for [token tokens]
+    (if (> (len token) 0)
+        (if (= (get token 0) "?")
+            (.write ret (red token))
+            (if (in
+                  token
+                  ["where" "select" "distinct" "option" "filter"
+                    "FILTER" "OPTION" "DISTINCT" "SELECT" "WHERE"])
+                (.write ret (blue token))
+                (if (= (get token 0) "<")
+                    (.write ret (bold token))
+                    (.write ret token)))))
+    (if (not (= token "?"))
+        (.write ret " ")))
+  (.seek ret 0)
+  (.read ret))
 
 ;;(print (colorize-sparql "select ?s ?p  where {?s ?p <http://dbpedia.org/schema/Person>}."))

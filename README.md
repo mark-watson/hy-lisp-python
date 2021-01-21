@@ -19,5 +19,9 @@ Please note that this repo also contains examples that are a work in progress fo
 
 December 19, 2020: I added a shell script to convert the Hy language examples to Python and store them in examples_translated_to_python/.
 
+Note: this is the only use of the let macro in this book, as of January 2021.
+
+I like to use the let macro except for one issue: auto-converting Hy to Python produces
+unattractive Python code if the let macro is used.
 
 
