@@ -28,8 +28,8 @@
               (if (not (in [e1 e2 x] relationship-statements))
                   (.extend relationship-statements [[e1 e2 x]])))
             (for [x l2]
-              (if (not (in [e1 e2 x] relationship-statements))
-                  (.extend relationship-statements [[e1 e2 x]])))))))
+              (if (not (in [e2 e1 x] relationship-statements))
+                  (.extend relationship-statements [[e2 e1 x]])))))))
   relationship-statements)
 
 ;;(pprint (entity-results->relationship-links ["http://dbpedia.org/resource/Bill_Gates" "http://dbpedia.org/resource/Microsoft"]))
