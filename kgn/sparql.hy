@@ -2,7 +2,6 @@
 
 (import json)
 (import requests)
-(require [hy.contrib.walk [let]])
 
 (import [cache [fetch-result-dbpedia save-query-results-dbpedia]])
 
@@ -13,10 +12,10 @@
   ;; check cache:
   (setv cached-results (fetch-result-dbpedia query))
   (if (> (len cached-results) 0)
-      (let ()
+      (do
         (print "Using cached query results")
         (eval cached-results))
-      (let ()
+      (do
         ;; Construct a request
         (setv params { "query" query "format" "json"})
         
@@ -30,11 +29,12 @@
         (setv results (get json-data "results"))
         
         (if (in "bindings" results)
-            (let [bindings (get results "bindings")
-                  qr
-                  (lfor binding bindings
-                        (lfor var vars
-                              [var (get (get binding var) "value")]))]
+            (do
+              (setv bindings (get results "bindings"))
+              (setv qr
+                    (lfor binding bindings
+                          (lfor var vars
+                                [var (get (get binding var) "value")])))
               (save-query-results-dbpedia query qr)
               qr)
             []))))

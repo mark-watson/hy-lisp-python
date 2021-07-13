@@ -3,7 +3,6 @@
 (import os)
 (import sys)
 (import [pprint [pprint]])
-(require [hy.contrib.walk [let]])
 
 (import [textui [select-entities get-query]])
 (import [kgnutils [dbpedia-get-entities-by-name]])
@@ -45,39 +44,39 @@
 (defn kgn []
   (while
     True
-    (let [query (get-query)]
-      (if (or (= query "quit") (= query "q"))
-          (break))
-      (setv elist (entities-in-text query))
-      (setv people-found-on-dbpedia [])
-      (setv places-found-on-dbpedia [])
-      (setv organizations-found-on-dbpedia [])
-      (global short-comment-to-uri)
-      (setv short-comment-to-uri {})
-      (for [key elist]
-        (setv type-uri (get entity-type-to-type-uri key))
-        (for [name (get elist key)]
-          (setv dbp (dbpedia-get-entities-by-name name type-uri))
-          (for [d dbp]
-            (setv short-comment (shorten-comment (second (second d)) (second (first d))))
-            (if (= key "PERSON")
-                (.extend people-found-on-dbpedia [(+ name  " || " short-comment)]))
-            (if (= key "GPE")
-                (.extend places-found-on-dbpedia [(+ name  " || " short-comment)]))
-            (if (= key "ORG")
-                (.extend organizations-found-on-dbpedia [(+ name  " || " short-comment)])))))
-      (setv user-selected-entities
-            (select-entities
-              people-found-on-dbpedia
-              places-found-on-dbpedia
-              organizations-found-on-dbpedia))
-      (setv uri-list [])
-      (for [entity (get user-selected-entities "entities")]
-        (setv short-comment (cut entity (+ 4 (.index entity " || "))))
-        (.extend uri-list [(get short-comment-to-uri short-comment)]))
-      (setv relation-data (entity-results->relationship-links uri-list))
-      (print "\nDiscovered relationship links:")
-      (pprint relation-data))))
+    (setv query (get-query))
+    (if (or (= query "quit") (= query "q"))
+        (break))
+    (setv elist (entities-in-text query))
+    (setv people-found-on-dbpedia [])
+    (setv places-found-on-dbpedia [])
+    (setv organizations-found-on-dbpedia [])
+    (global short-comment-to-uri)
+    (setv short-comment-to-uri {})
+    (for [key elist]
+      (setv type-uri (get entity-type-to-type-uri key))
+      (for [name (get elist key)]
+        (setv dbp (dbpedia-get-entities-by-name name type-uri))
+        (for [d dbp]
+          (setv short-comment (shorten-comment (second (second d)) (second (first d))))
+          (if (= key "PERSON")
+              (.extend people-found-on-dbpedia [(+ name  " || " short-comment)]))
+          (if (= key "GPE")
+              (.extend places-found-on-dbpedia [(+ name  " || " short-comment)]))
+          (if (= key "ORG")
+              (.extend organizations-found-on-dbpedia [(+ name  " || " short-comment)])))))
+    (setv user-selected-entities
+          (select-entities
+            people-found-on-dbpedia
+            places-found-on-dbpedia
+            organizations-found-on-dbpedia))
+    (setv uri-list [])
+    (for [entity (get user-selected-entities "entities")]
+      (setv short-comment (cut entity (+ 4 (.index entity " || "))))
+      (.extend uri-list [(get short-comment-to-uri short-comment)]))
+    (setv relation-data (entity-results->relationship-links uri-list))
+    (print "\nDiscovered relationship links:")
+    (pprint relation-data)))
 
 ;; (pprint (dbpedia-get-entities-by-name "Bill Gates" "<http://dbpedia.org/ontology/Person>"))
 

@@ -1,6 +1,3 @@
-import hy.macros
-hy.macros.require('hy.contrib.walk', None, assignments=[['let', 'let']],
-    prefix='')
 from io import StringIO
 
 
@@ -29,18 +26,16 @@ def tokenize_keep_uris(s):
 
 
 def colorize_sparql(s):
-    _hyx_letXUffffX1 = {}
-    _hyx_letXUffffX1['tokens'] = tokenize_keep_uris(s.replace('{', ' { ').
-        replace('}', ' } ').replace('.', ' . '))
-    _hyx_letXUffffX1['ret'] = StringIO()
-    for token in _hyx_letXUffffX1['tokens']:
-        (_hyx_letXUffffX1['ret'].write(red(token)) if token[0] == '?' else 
-            _hyx_letXUffffX1['ret'].write(blue(token)) if token in ['where',
-            'select', 'distinct', 'option', 'filter', 'FILTER', 'OPTION',
-            'DISTINCT', 'SELECT', 'WHERE'] else _hyx_letXUffffX1['ret'].
-            write(bold(token)) if token[0] == '<' else _hyx_letXUffffX1[
-            'ret'].write(token)) if len(token) > 0 else None
-        _hyx_letXUffffX1['ret'].write(' ') if not token == '?' else None
-    _hyx_letXUffffX1['ret'].seek(0)
-    return _hyx_letXUffffX1['ret'].read()
+    tokens = tokenize_keep_uris(s.replace('{', ' { ').replace('}', ' } ').
+        replace('.', ' . '))
+    ret = StringIO()
+    for token in tokens:
+        (ret.write(red(token)) if token[0] == '?' else ret.write(blue(token
+            )) if token in ['where', 'select', 'distinct', 'option',
+            'filter', 'FILTER', 'OPTION', 'DISTINCT', 'SELECT', 'WHERE'] else
+            ret.write(bold(token)) if token[0] == '<' else ret.write(token)
+            ) if len(token) > 0 else None
+        ret.write(' ') if not token == '?' else None
+    ret.seek(0)
+    return ret.read()
 

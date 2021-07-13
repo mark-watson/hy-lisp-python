@@ -1,10 +1,7 @@
-import hy.macros
 from hy.core.language import first, name, second
 import os
 import sys
 from pprint import pprint
-hy.macros.require('hy.contrib.walk', None, assignments=[['let', 'let']],
-    prefix='')
 from textui import select_entities, get_query
 from kgnutils import dbpedia_get_entities_by_name
 from relationships import hyx_entity_results_XgreaterHthan_signXrelationship_links
@@ -43,15 +40,13 @@ query = ''
 
 def kgn():
     while True:
-        _hyx_letXUffffX1 = {}
-        _hyx_letXUffffX1['query'] = get_query()
-        if _hyx_letXUffffX1['query'] == 'quit' or _hyx_letXUffffX1['query'
-            ] == 'q':
+        query = get_query()
+        if query == 'quit' or query == 'q':
             break
             _hy_anon_var_4 = None
         else:
             _hy_anon_var_4 = None
-        elist = entities_in_text(_hyx_letXUffffX1['query'])
+        elist = entities_in_text(query)
         people_found_on_dbpedia = []
         places_found_on_dbpedia = []
         organizations_found_on_dbpedia = []

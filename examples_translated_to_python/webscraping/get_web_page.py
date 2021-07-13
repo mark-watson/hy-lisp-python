@@ -2,6 +2,7 @@ from urllib.request import Request, urlopen
 
 
 def get_raw_data_from_web(aUri, anAgent={'User-Agent': 'HyLangBook/1.0'}):
+    print(aUri)
     req = Request(aUri, headers=anAgent)
     httpResponse = urlopen(req)
     data = httpResponse.read()
