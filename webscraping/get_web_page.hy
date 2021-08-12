@@ -11,5 +11,5 @@
 (defn get-web-page-from-disk [filePath]
   (.read (open filePath "r")))
 
-;;(print (get-raw-data-from-web "http://markwatson.com"))
+;;(print (get-raw-data-from-web "https://markwatson.com"))
 ;;(print (get-web-page-from-disk "democracynow_home_page.html"))
