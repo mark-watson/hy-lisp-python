@@ -1,6 +1,6 @@
-(import [PyInquirer [style_from_dict Token prompt Separator]])
+(import PyInquirer [style_from_dict Token prompt Separator])
 
-(import [pprint [pprint]])
+(import pprint [pprint])
 
 (defn select-entities [people places organizations]
   (setv choices [])

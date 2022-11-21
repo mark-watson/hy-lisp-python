@@ -2,11 +2,11 @@
 
 (import os)
 (import sys)
-(import [pprint [pprint]])
+(import pprint [pprint])
 
-(import [textui [select-entities get-query]])
-(import [kgnutils [dbpedia-get-entities-by-name]])
-(import [relationships [entity-results->relationship-links]])
+(import textui [select-entities get-query])
+(import kgnutils [dbpedia-get-entities-by-name])
+(import relationships [entity-results->relationship-links])
 
 (import spacy)
 
@@ -22,7 +22,7 @@
         (setv (get ret etype) (+ (get ret etype) [ename]))
         (assoc ret etype [ename])))
   ret)
-        
+
 
 ;;(print (entities-in-text "Bill Clinton, Canada, IBM, San Diego, Florida, Great Lakes, Bill Gates, Pepsi, John Smith, Google"))
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env hy
 
-(import [sparql [dbpedia-sparql]])
-(import [colorize [colorize-sparql]])
+(import sparql [dbpedia-sparql])
+(import colorize [colorize-sparql])
 
 (import [pprint [pprint]])
 

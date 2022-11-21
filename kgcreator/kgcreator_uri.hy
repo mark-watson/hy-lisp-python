@@ -1,7 +1,7 @@
 #!/usr/bin/env hy
 
-(import [os [scandir]])
-(import [os.path [splitext exists]])
+(import os [scandir])
+(import os.path [splitext exists])
 (import spacy)
 
 (setv nlp-model (spacy.load "en"))

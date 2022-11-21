@@ -3,7 +3,7 @@
 (import json)
 (import requests)
 
-(import [cache [fetch-result-dbpedia save-query-results-dbpedia]])
+(import cache [fetch-result-dbpedia save-query-results-dbpedia])
 
 (setv wikidata-endpoint "https://query.wikidata.org/bigdata/namespace/wdq/sparql")
 (setv dbpedia-endpoint "https://dbpedia.org/sparql")

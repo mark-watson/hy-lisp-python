@@ -1,4 +1,4 @@
-(import [io [StringIO]])
+(import io [StringIO])
 
 ;; Utilities to add ANSI terminal escape sequences to colorize text.
 ;; note: the following 5 functions return string values that then need to

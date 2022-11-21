@@ -1,9 +1,9 @@
-(import [pprint [pprint]])
+(import pprint [pprint])
 
-(import [sparql [dbpedia-sparql]])
-(import [colorize [colorize-sparql]])
+(import sparql [dbpedia-sparql])
+(import colorize [colorize-sparql])
 
-;;(import [textui [select-entities get-query]])
+;;(import textui [select-entities get-query])
 
 (defn dbpedia-get-relationships [s-uri o-uri]
   (setv query

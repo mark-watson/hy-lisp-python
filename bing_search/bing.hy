@@ -3,7 +3,7 @@
 (import json)
 (import os)
 (import sys)
-(import [pprint [pprint]])
+(import pprint [pprint])
 (import requests)
 
 ;; Add your Bing Search V7 subscription key and endpoint to your environment variables.

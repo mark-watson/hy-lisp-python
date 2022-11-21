@@ -1,6 +1,6 @@
-(import [sqlite3 [connect version Error ]])
+(import sqlite3 [connect version Error ])
 (import json)
-(import [os [getenv]])
+(import os [getenv])
              
 (setv *db-path* (.format "{}/.kgn_hy_cache.db" (getenv "HOME")))
 
