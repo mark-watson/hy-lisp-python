@@ -1,6 +1,6 @@
 #!/usr/bin/env hy
 
-(import [urllib.request [Request urlopen]])
+(import urllib.request [Request urlopen])
 
 (defn get-raw-data-from-web [aUri &optional [anAgent {"User-Agent" "HyLangBook/1.0"}]]
   (setv req (Request aUri :headers anAgent))

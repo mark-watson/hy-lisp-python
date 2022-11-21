@@ -30,7 +30,7 @@
   (setv cur (conn.cursor))
   (cur.execute "select data from dbpedia where query = ? limit 1" [query])
   (setv d (cur.fetchall))
-  (if (> (len d) 0)
+  (when (> (len d) 0)
       (setv results (json.loads (first (first d)))))
   (conn.close)
   results)

@@ -1,4 +1,4 @@
-(import [psycopg2 [connect]])
+(import psycopg2 [connect])
 
 (defn connection-and-cursor [dbname username]
   (setv conn (connect :dbname dbname :user username))

@@ -19,7 +19,7 @@
           (.replace (.replace (.replace s "{" " { ") "}" " } ") "." " . ")))
   (setv ret (StringIO)) ;; ret is an output stream for a string buffer
   (for [token tokens]
-    (if (> (len token) 0)
+    (when (> (len token) 0)
         (if (= (get token 0) "?")
             (.write ret (red token))
             (if (in
@@ -30,7 +30,7 @@
                 (if (= (get token 0) "<")
                     (.write ret (bold token))
                     (.write ret token)))))
-    (if (not (= token "?"))
+    (when (not (= token "?"))
         (.write ret " ")))
   (.seek ret 0)
   (.read ret))

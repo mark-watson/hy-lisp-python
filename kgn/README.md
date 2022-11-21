@@ -6,6 +6,8 @@ One time only, install requirements PyInquirer (for text based menu system: arro
 
     pip install -r requirements.txt
 
+(note: PyInquirer is not working for me with newer versions of Python and has not been updated)
+
 and then run the program:
 
     hy kgn.hy

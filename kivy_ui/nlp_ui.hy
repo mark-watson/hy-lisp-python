@@ -1,8 +1,8 @@
-(import [kivy.app [App]])
-(import [kivy.uix.boxlayout [BoxLayout]])
-(import [kivy.uix.button [Button]])
-(import [kivy.uix.textinput [TextInput]])
-(import [kivy.uix.label [Label]])
+(import kivy.app [App])
+(import kivy.uix.boxlayout [BoxLayout])
+(import kivy.uix.button [Button])
+(import kivy.uix.textinput [TextInput])
+(import kivy.uix.label [Label])
 
 ;; TBD use code from NLP chapter in book
 

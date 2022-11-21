@@ -45,10 +45,10 @@
 
 (pprint (get first-result "displayUrl"))
 
-(if (in "displayUrl" first-result)
+(when (in "displayUrl" first-result)
     (print (.format " key: {:15} \t:\t {}" "displayUrl" (get first-result "displayUrl"))))
-(if (in "language" first-result)
+(when (in "language" first-result)
     (print (.format " key: {:15} \t:\t {}" "language" (get first-result "language"))))
-(if (in "name" first-result)
+(when (in "name" first-result)
     (print (.format " key: {:15} \t:\t {}" "name" (get first-result "name"))))
 

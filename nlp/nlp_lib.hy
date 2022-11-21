@@ -4,7 +4,7 @@
 
 (import spacy)
 
-(setv nlp-model (spacy.load "en"))
+(setv nlp-model (spacy.load "en_core_web_sm"))
 
 (defn nlp [some-text]
   (setv doc (nlp-model some-text))

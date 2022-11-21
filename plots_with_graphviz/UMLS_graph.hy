@@ -1,4 +1,4 @@
-(import [graphviz [Digraph]]) ;; directional graph
+(import graphviz [Digraph]) ;; directional graph
 
 (setv dot (Digraph :comment "Plt sample UMLS from MultiHop Paper Data"))
 (setv input-file (open "test.triples" "r"))

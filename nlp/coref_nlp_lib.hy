@@ -3,7 +3,10 @@
 (import argparse os)
 (import spacy neuralcoref)
 
-(setv nlp2 (spacy.load "en"))
+;; To load data file from the web (only need to do this once per Pyhton env):
+;;     python -m spacy download en_core_web_sm
+
+(setv nlp2 (spacy.load "en_core_web_sm"))
 (neuralcoref.add_to_pipe nlp2)
 
 (defn coref-nlp [some-text]

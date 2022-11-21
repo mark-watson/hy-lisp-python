@@ -3,12 +3,12 @@
 ;; This example was translated from the Python example in the Keras
 ;; documentation at: https://keras.io/examples/lstm_text_generation/
 
-(import [keras.callbacks [LambdaCallback]])
-(import [keras.models [Sequential]])
-(import [keras.layers [Dense LSTM]])
-(import [keras.optimizers [RMSprop]])
-(import [keras.utils.data_utils [get_file]])
-(import [numpy :as np]) ;; note the syntax for aliasing a module name
+(import keras.callbacks [LambdaCallback])
+(import keras.models [Sequential])
+(import keras.layers [Dense LSTM])
+(import keras.optimizers [RMSprop])
+(import keras.utils.data_utils [get_file])
+(import numpy :as np) ;; note the syntax for aliasing a module name
 (import random sys io)
 
 (setv path

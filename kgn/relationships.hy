@@ -20,7 +20,7 @@
   (setv relationship-statements [])
   (for [e1 uris]
     (for [e2 uris]
-      (if (not (= e1 e2))
+      (when (not (= e1 e2))
           (do
             (setv l1 (dbpedia-get-relationships e1 e2))
             (setv l2 (dbpedia-get-relationships e2 e1))

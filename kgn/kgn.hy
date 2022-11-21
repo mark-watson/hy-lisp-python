@@ -45,7 +45,7 @@
   (while
     True
     (setv query (get-query))
-    (if (or (= query "quit") (= query "q"))
+    (when (or (= query "quit") (= query "q"))
         (break))
     (setv elist (entities-in-text query))
     (setv people-found-on-dbpedia [])
@@ -59,11 +59,11 @@
         (setv dbp (dbpedia-get-entities-by-name name type-uri))
         (for [d dbp]
           (setv short-comment (shorten-comment (second (second d)) (second (first d))))
-          (if (= key "PERSON")
+          (when (= key "PERSON")
               (.extend people-found-on-dbpedia [(+ name  " || " short-comment)]))
-          (if (= key "GPE")
+          (when (= key "GPE")
               (.extend places-found-on-dbpedia [(+ name  " || " short-comment)]))
-          (if (= key "ORG")
+          (when (= key "ORG")
               (.extend organizations-found-on-dbpedia [(+ name  " || " short-comment)])))))
     (setv user-selected-entities
           (select-entities

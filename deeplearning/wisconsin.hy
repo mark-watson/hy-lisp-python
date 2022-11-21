@@ -4,7 +4,7 @@
 (import keras
         keras.utils.data-utils)
 
-(import [pandas [read-csv]])
+(import pandas [read-csv])
 
 (defn build-model []
   (setv model (keras.models.Sequential))

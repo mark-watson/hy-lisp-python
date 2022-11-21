@@ -15,8 +15,8 @@
 (defn data2Rdf [meta-data entities fout]
   (for [[value abbreviation] entities]
     (setv a-literal (+ "\"" value "\""))
-    (if (in value v2umap) (setv a-literal (get v2umap value)))
-    (if (in abbreviation e2umap)
+    (when (in value v2umap) (setv a-literal (get v2umap value)))
+    (when (in abbreviation e2umap)
       (.write fout (+ "<" meta-data ">\t" (get e2umap abbreviation) "\t" a-literal " .\n")))))
 
 (setv e2umap { ;; entity type name to URI
@@ -41,7 +41,7 @@
     (with [entries (scandir directory-name)]
       (for [entry entries]
         (setv [_ file-extension] (splitext entry.name))
-        (if (= file-extension ".txt")
+        (when (= file-extension ".txt")
             (do
               (setv check-file-name (+ (cut entry.path 0 -4) ".meta"))
               (if (exists check-file-name)

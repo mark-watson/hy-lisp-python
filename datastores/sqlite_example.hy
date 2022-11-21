@@ -1,6 +1,6 @@
 #!/usr/bin/env hy
 
-(import [sqlite-lib [create-db connection query]])
+(import sqlite-lib [create-db connection query])
 
 (defn test_sqlite-lib []
   (setv dbpath ":memory:")

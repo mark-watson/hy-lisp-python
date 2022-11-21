@@ -4,7 +4,10 @@
 (import os.path [splitext exists])
 (import spacy)
 
-(setv nlp-model (spacy.load "en"))
+;; To load data file from the web (only need to do this once per Pyhton env):
+;;     python -m spacy download en_core_web_sm
+
+(setv nlp-model (spacy.load "en_core_web_sm"))
 
 (defn find-entities-in-text [some-text]
   (defn clean [s]
@@ -14,7 +17,7 @@
 
 (defn data2Rdf [meta-data entities fout]
   (for [[value abbreviation] entities]
-    (if (in abbreviation e2umap)
+    (when (in abbreviation e2umap)
       (.write fout (+ "<" meta-data ">\t" (get e2umap abbreviation) "\t" "\"" value "\"" " .\n")))))
 
 (setv e2umap {
@@ -30,7 +33,7 @@
     (with [entries (scandir directory-name)]
       (for [entry entries]
         (setv [_ file-extension] (splitext entry.name))
-        (if (= file-extension ".txt")
+        (when (= file-extension ".txt")
             (do
               (setv check-file-name (+ (cut entry.path 0 -4) ".meta"))
               (if (exists check-file-name)

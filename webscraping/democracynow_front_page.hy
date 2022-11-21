@@ -1,7 +1,7 @@
 #!/usr/bin/env hy
 
-(import [get-web-page [get-web-page-from-disk]])
-(import [bs4 [BeautifulSoup]])
+(import get-web-page [get-web-page-from-disk])
+(import bs4 [BeautifulSoup])
 
 ;; you need to run 'make data' to fetch sample HTML data for dev and testing
 
@@ -13,6 +13,6 @@
           :if (> (len (.get-text e)) 0)
           (, (.get e "href") (.get-text e))))
 
-(if (= __name__ "__main__")
+(when (= __name__ "__main__")
   (for [[uri text] (get-democracy-now-links)]
     (print uri ":" text)))

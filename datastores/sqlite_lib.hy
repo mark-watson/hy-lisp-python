@@ -1,4 +1,4 @@
-(import [sqlite3 [connect version Error ]])
+(import sqlite3 [connect version Error ])
 
 (defn create-db [db-file-path] ;; db-file-path can also be ":memory:"
   (setv conn (connect db-file-path))
