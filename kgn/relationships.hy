@@ -25,10 +25,10 @@
             (setv l1 (dbpedia-get-relationships e1 e2))
             (setv l2 (dbpedia-get-relationships e2 e1))
             (for [x l1]
-              (if (not (in [e1 e2 x] relationship-statements))
+              (when (not (in [e1 e2 x] relationship-statements))
                   (.extend relationship-statements [[e1 e2 x]])))
             (for [x l2]
-              (if (not (in [e1 e2 x] relationship-statements))
+              (when (not (in [e1 e2 x] relationship-statements))
                   (.extend relationship-statements [[e1 e2 x]])))))))
   relationship-statements)
 

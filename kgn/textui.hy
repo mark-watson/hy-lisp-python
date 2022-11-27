@@ -1,3 +1,6 @@
+;; from collections.abc import Mapping
+(import collections.abc [Mapping])
+
 (import PyInquirer [style_from_dict Token prompt Separator])
 
 (import pprint [pprint])
@@ -24,12 +27,12 @@
           }
          ]
         )
-  (prompt questions))
+  (prompt.prompt questions))
 
 (defn get-query []
   (get
-    (prompt [{"type" "input"
-              "name" "query"
-              "message" "Enter a list of entities:"}])
+    (prompt.prompt [{"type" "input"
+                     "name" "query"
+                     "message" "Enter a list of entities:"}])
     "query"))
 

@@ -1,7 +1,7 @@
 (import sqlite3 [connect version Error ])
 (import json)
 (import os [getenv])
-             
+
 (setv *db-path* (.format "{}/.kgn_hy_cache.db" (getenv "HOME")))
 
 ;;(print *db-path*)
@@ -31,7 +31,7 @@
   (cur.execute "select data from dbpedia where query = ? limit 1" [query])
   (setv d (cur.fetchall))
   (when (> (len d) 0)
-      (setv results (json.loads (first (first d)))))
+      (setv results (json.loads (get (get d 0) 0))))
   (conn.close)
   results)
  

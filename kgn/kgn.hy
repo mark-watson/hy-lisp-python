@@ -3,14 +3,15 @@
 (import os)
 (import sys)
 (import pprint [pprint])
+(require hyrule [assoc])
 
 (import textui [select-entities get-query])
-(import kgnutils [dbpedia-get-entities-by-name])
+(import kgnutils [dbpedia-get-entities-by-name first second])
 (import relationships [entity-results->relationship-links])
 
 (import spacy)
 
-(setv nlp-model (spacy.load "en"))
+(setv nlp-model (spacy.load "en_core_web_sm"))
 
 (defn entities-in-text [s]
   (setv doc (nlp-model s))
@@ -72,6 +73,7 @@
             organizations-found-on-dbpedia))
     (setv uri-list [])
     (for [entity (get user-selected-entities "entities")]
+      (print "** entity:") (print entity)
       (setv short-comment (cut entity (+ 4 (.index entity " || "))))
       (.extend uri-list [(get short-comment-to-uri short-comment)]))
     (setv relation-data (entity-results->relationship-links uri-list))

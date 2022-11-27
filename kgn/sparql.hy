@@ -14,6 +14,7 @@
   (if (> (len cached-results) 0)
       (do
         (print "Using cached query results")
+        (print cached-results)
         (eval cached-results))
       (do
         ;; Construct a request
