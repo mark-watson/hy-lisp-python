@@ -10,7 +10,7 @@
 
 (import spacy)
 
-(setv nlp-model (spacy.load "en"))
+(setv nlp-model (spacy.load "en_core_web_sm"))
 
 (defn entities-in-text [s]
   (setv doc (nlp-model s))

@@ -1,6 +1,20 @@
 # Code for my book "A Lisp Programmer Living in Python-Land: The Hy Programming Language"
 
-You can purchase the book at [leanpub](https://leanpub.com/hy-lisp-python) or read the book online for free. Also, the minimum purchase price for the book is $0.00 (free!) so you don't have to pay for it. I offer free updates to new editions to all of my books purchased on leanpub.
+
+You can purchase the book at [leanpub](https://leanpub.com/hy-lisp-python) or read the book online for free on my website [https://markwatson.com](https://markwatson.com). I offer free updates to new editions to all of my books purchased on leanpub.
+
+## Warning: master branch of this repo requires Python 3.8 and hy-0.19.0
+
+    pip uninstall hy
+    conda create -n hy python=3.8
+    conda activate hy
+    wget https://github.com/hylang/hy/releases/download/0.19.0/hy-0.19.0-py2.py3-none-any.whl
+    pip install hy-0.19.0-py2.py3-none-any.whl
+    pip install PyInquirer
+
+Note: these directions were tested 2022/11/27 on the master branch. I have a work in progress dev branch where I am updating the code to Python 3.11 and the latest Hy version. The dev branch's 'kgn' exasmple is currently breaking and the code on dev branch is not well tested.
+
+## Book Content
 
 This book covers many programming topics using the Lisp language Hy that compiles to Python AST and is compatible with code, libraries, and frameworks written in Python. The main topics we will cover and write example applications for are:
 
