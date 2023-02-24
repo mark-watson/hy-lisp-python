@@ -22,4 +22,6 @@ Enter a list of people, place, organization names when prompted. You then see a 
 
     Bill Gates Microsoft Steve Jobs
 
+## Warning: this code uses PyInquirer that reuqires you to install an earlier version of Hy
+
 

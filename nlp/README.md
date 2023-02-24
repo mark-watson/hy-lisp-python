@@ -6,3 +6,9 @@ directions at:
         https://github.com/huggingface/neuralcoref
 
 
+## Misc. to install spaCy on M1 MacBook
+
+pip install -U pip setuptools wheel
+pip install -U 'spacy[apple]'
+python -m spacy download en_core_web_sm
+
