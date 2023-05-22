@@ -36,7 +36,11 @@
 (print "\nDetailed printout from the first search result:\n")
 
 (setv result-list (get results "value"))
-(setv first-result (first result-list))
+
+(print "\nResults for key 'value':\n")
+(pprint result-list)
+
+(setv first-result (get result-list 0))
 
 (print "\nFirst result, all data:\n")
 (pprint first-result)
