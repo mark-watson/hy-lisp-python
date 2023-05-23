@@ -1,9 +1,7 @@
-;;; #!/usr/bin/env hy
+#!/usr/bin/env hy
 
 (import argparse)
 (import os)
-;;(import keras
-;;        keras.utils.data-utils)
 (import tensorflow [keras])
 (import tensorflow.keras [layers])
 
@@ -12,9 +10,7 @@
 
 (defn build-model []
   (setv model (keras.models.Sequential))
-  (. model add (keras.layers.Dense 9
-                 :activation "relu"))
-  (.add (model (keras.layers.Dense 9
+  (.add model (keras.layers.Dense 9
                  :activation "relu"))
   (.add model (keras.layers.Dense 12
                  :activation "relu"))
@@ -22,7 +18,7 @@
                  :activation "sigmoid"))
   (.compile model :loss      "binary_crossentropy"
                   :optimizer (keras.optimizers.RMSprop))
-  model))
+  model)
 
 (defn first [x] (get x 0))
 
