@@ -12,7 +12,7 @@
   (setv filtered-a
     (lfor e all-anchor-elements
           :if (> (len (.get-text e)) 0)
-          (, (.get e "href") (.get-text e))))
+          #((.get e "href") (.get-text e))))
   filtered-a)
 
 (defn create-npr-summary []
