@@ -1,22 +1,30 @@
-#!/usr/bin/env hy
+;;; #!/usr/bin/env hy
 
-(import argparse os)
-(import keras
-        keras.utils.data-utils)
+(import argparse)
+(import os)
+;;(import keras
+;;        keras.utils.data-utils)
+(import tensorflow [keras])
+(import tensorflow.keras [layers])
 
 (import pandas [read-csv])
+(import pandas)
 
 (defn build-model []
   (setv model (keras.models.Sequential))
-  (.add model (keras.layers.core.Dense 9
+  (. model add (keras.layers.Dense 9
                  :activation "relu"))
-  (.add model (keras.layers.core.Dense 12
+  (.add (model (keras.layers.Dense 9
                  :activation "relu"))
-  (.add model (keras.layers.core.Dense 1
+  (.add model (keras.layers.Dense 12
+                 :activation "relu"))
+  (.add model (keras.layers.Dense 1
                  :activation "sigmoid"))
   (.compile model :loss      "binary_crossentropy"
                   :optimizer (keras.optimizers.RMSprop))
-  model)
+  model))
+
+(defn first [x] (get x 0))
 
 (defn train [batch-size model x y]
   (for [it (range 50)]
@@ -27,9 +35,9 @@
 
 (defn load-data [file-name]
   (setv all-data (read-csv file-name :header None))
-  (setv x-data10 (. all-data.iloc [(, (slice 0 10) [0 1 2 3 4 5 6 7 8])] values))
+  (setv x-data10 (. all-data.iloc [#((slice 0 10) [0 1 2 3 4 5 6 7 8])] values))
   (setv x-data (* 0.1 x-data10))
-  (setv y-data (. all-data.iloc [(, (slice 0 10) [9])] values))
+  (setv y-data (. all-data.iloc [#((slice 0 10) [9])] values))
   [x-data y-data])
 
 (defn main []
