@@ -20,7 +20,7 @@ For Hy version 0.25: also need: ** pip install hyrule**
 
 Enter a list of people, place, organization names when prompted. You then see a list of entities found on DBPedia. Select the entities you want more information on. For example, try entering the following input:
 
-    Bill Gates Microsoft Steve Jobs
+    Steve Jobs went to Microsoft in Seattle to visit Bill Gates
 
 ## Warning: this code uses PyInquirer that reuqires you to install an earlier version of Hy
 

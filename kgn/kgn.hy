@@ -73,8 +73,7 @@
             organizations-found-on-dbpedia))
     (setv uri-list [])
     (for [entity (get user-selected-entities "entities")]
-      (print "** entity:") (print entity)
-      (setv short-comment (cut entity (+ 4 (.index entity " || "))))
+      (setv short-comment (cut entity (+ 4 (.index entity " || ")) (len entity)))
       (.extend uri-list [(get short-comment-to-uri short-comment)]))
     (setv relation-data (entity-results->relationship-links uri-list))
     (print "\nDiscovered relationship links:")

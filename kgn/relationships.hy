@@ -5,6 +5,10 @@
 
 ;;(import textui [select-entities get-query])
 
+(defn flatten [x]
+  ;; TBD
+  x)
+
 (defn dbpedia-get-relationships [s-uri o-uri]
   (setv query
         (.format

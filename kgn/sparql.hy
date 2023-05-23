@@ -3,42 +3,31 @@
 (import json)
 (import requests)
 
-(import cache [fetch-result-dbpedia save-query-results-dbpedia])
-
 (setv wikidata-endpoint "https://query.wikidata.org/bigdata/namespace/wdq/sparql")
 (setv dbpedia-endpoint "https://dbpedia.org/sparql")
 
 (defn do-query-helper [endpoint query]
-  ;; check cache:
-  (setv cached-results (fetch-result-dbpedia query))
-  (if (> (len cached-results) 0)
-      (do
-        (print "Using cached query results")
-        (print cached-results)
-        (eval cached-results))
-      (do
-        ;; Construct a request
-        (setv params { "query" query "format" "json"})
+  ;; Construct a request
+  (setv params { "query" query "format" "json"})
         
-        ;; Call the API
-        (setv response (requests.get endpoint :params params))
+  ;; Call the API
+  (setv response (requests.get endpoint :params params))
         
-        (setv json-data (response.json))
+  (setv json-data (response.json))
         
-        (setv vars (get (get json-data "head") "vars"))
+  (setv vars (get (get json-data "head") "vars"))
         
-        (setv results (get json-data "results"))
+  (setv results (get json-data "results"))
         
-        (if (in "bindings" results)
-            (do
-              (setv bindings (get results "bindings"))
-              (setv qr
-                    (lfor binding bindings
-                          (lfor var vars
-                                [var (get (get binding var) "value")])))
-              (save-query-results-dbpedia query qr)
-              qr)
-            []))))
+  (if (in "bindings" results)
+    (do
+      (setv bindings (get results "bindings"))
+      (setv qr
+            (lfor binding bindings
+                (lfor var vars
+                   [var (get (get binding var) "value")])))
+      qr)
+    []))
 
 (defn wikidata-sparql [query]
   (do-query-helper wikidata-endpoint query))

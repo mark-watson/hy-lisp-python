@@ -16,7 +16,7 @@
 (defn colorize-sparql [s]
   (setv tokens
         (tokenize-keep-uris
-          (.replace (.replace (.replace s "{" " { ") "}" " } ") "." " . ")))
+          (.replace (.replace s "{" " { ") "}" " } ")))
   (setv ret (StringIO)) ;; ret is an output stream for a string buffer
   (for [token tokens]
     (when (> (len token) 0)
