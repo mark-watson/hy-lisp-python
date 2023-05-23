@@ -1,22 +1,10 @@
-(import [pdfminer.high_level [extract_text]])
-(import re)
+(import pdfminer.high_level [extract_text])
 
-(defn p2t [s]
-  (setv text (extract_text s))
-  (.replace
-    (.replace
-      (.replace
-        (.replace 
-          (re.sub "([\d])" "" text)
-          "  "
-          " ")
-        "()"
-        "")
-      ".."
-      ".")
-    "\n.\n"
-    "\n"))
+;; May 23, 2023: I removed old code to remove unwanted text after calling pdfminer.
+;; For now, I am just using pdfminer as-is.
 
+(defn pdf2text [s]
+  (extract_text s))
 
-# (print (p2t "Sales force - Multi-Hop Knowledge Graph Reasoning with Reward Shaping.pdf"))
+(print (pdf2text "Sales force - Multi-Hop Knowledge Graph Reasoning with Reward Shaping.pdf"))
 
