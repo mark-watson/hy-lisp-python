@@ -8,7 +8,7 @@
 (defn connection [db-file-path] ;; db-file-path can also be ":memory:"
   (sqlite3.connect db-file-path))
 
-(defn query [conn sql &optional variable-bindings]
+(defn query [conn sql [variable-bindings None]]
   (setv cur (conn.cursor))
   (if variable-bindings
     (cur.execute sql variable-bindings)

@@ -1,18 +1,9 @@
 #!/usr/bin/env hy
 
-;;(import sqlite-lib [create-db connection query])
-(import sqlite3)
-
-(defn query [conn sql &optional [variable-bindings None]]
-(print variable-bindings)
-  (setv cur (conn.cursor))
-  (if variable-bindings
-    (cur.execute sql variable-bindings)
-    (cur.execute sql))
-  (cur.fetchall))
+(import sqlite-lib [create-db connection query])
 
 (defn test_sqlite-lib []
-  (setv conn (sqlite3.connect "test.db"))
+  (setv conn (connection ":memory:")) ;; "test.db"))
   (query conn "CREATE TABLE people (name TEXT, email TEXT);")
   (print
     (query conn "INSERT INTO people VALUES ('Mark', 'mark@markwatson.com')"))
