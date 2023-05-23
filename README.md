@@ -1,10 +1,10 @@
 # Code for my book "A Lisp Programmer Living in Python-Land: The Hy Programming Language"
 
-The code examples have been updated on 2022/11/21 to run with Hy version 0.25:
+The code examples have been updated on 2023/5/23 to run with Hy version 0.26:
 
 ```
 $ hy
-Hy 0.25.0 using CPython(main) 3.11.0 on Darwin
+Hy 0.26.0 using CPython(main) 3.11.0 on Darwin
 => 
 ```
 
