@@ -71,6 +71,7 @@
             people-found-on-dbpedia
             places-found-on-dbpedia
             organizations-found-on-dbpedia))
+    (print "****** user-selected-entities") (pprint user-selected-entities)
     (setv uri-list [])
     (for [entity (get user-selected-entities "entities")]
       (setv short-comment (cut entity (+ 4 (.index entity " || ")) (len entity)))

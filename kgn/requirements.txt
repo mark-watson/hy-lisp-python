@@ -1,3 +1,4 @@
 PyInquirer
-hyrule
+requests
+spacy
 
