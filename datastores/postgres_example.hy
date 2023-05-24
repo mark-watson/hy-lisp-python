@@ -1,6 +1,6 @@
 #!/usr/bin/env hy
 
-(import [postgres-lib [connection-and-cursor query]])
+(import postgres-lib [connection-and-cursor query])
 
 (defn test-postgres-lib []
   (setv [conn cursor] (connection-and-cursor "hybook" "markw"))

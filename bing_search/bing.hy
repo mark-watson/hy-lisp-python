@@ -3,7 +3,7 @@
 (import json)
 (import os)
 (import sys)
-(import [pprint [pprint]])
+(import pprint [pprint])
 (import requests)
 
 ;; Add your Bing Search V7 subscription key and endpoint to your environment variables.
@@ -36,7 +36,11 @@
 (print "\nDetailed printout from the first search result:\n")
 
 (setv result-list (get results "value"))
-(setv first-result (first result-list))
+
+(print "\nResults for key 'value':\n")
+(pprint result-list)
+
+(setv first-result (get result-list 0))
 
 (print "\nFirst result, all data:\n")
 (pprint first-result)
@@ -45,10 +49,10 @@
 
 (pprint (get first-result "displayUrl"))
 
-(if (in "displayUrl" first-result)
+(when (in "displayUrl" first-result)
     (print (.format " key: {:15} \t:\t {}" "displayUrl" (get first-result "displayUrl"))))
-(if (in "language" first-result)
+(when (in "language" first-result)
     (print (.format " key: {:15} \t:\t {}" "language" (get first-result "language"))))
-(if (in "name" first-result)
+(when (in "name" first-result)
     (print (.format " key: {:15} \t:\t {}" "name" (get first-result "name"))))
 

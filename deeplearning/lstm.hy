@@ -3,16 +3,17 @@
 ;; This example was translated from the Python example in the Keras
 ;; documentation at: https://keras.io/examples/lstm_text_generation/
 
-(import [keras.callbacks [LambdaCallback]])
-(import [keras.models [Sequential]])
-(import [keras.layers [Dense LSTM]])
-(import [keras.optimizers [RMSprop]])
-(import [keras.utils.data_utils [get_file]])
-(import [numpy :as np]) ;; note the syntax for aliasing a module name
+(import keras.callbacks [LambdaCallback])
+(import keras.models [Sequential])
+(import keras.layers [Dense LSTM])
+(import keras.optimizers [RMSprop])
+(import keras [utils])
+;;(import keras.utils.data_utils [get_file])
+(import numpy :as np) ;; note the syntax for aliasing a module name
 (import random sys io)
 
 (setv path
-      (get_file        ;; this saves a local copy in ~/.keras/datasets
+      (utils.get_file        ;; this saves a local copy in ~/.keras/datasets
         "nietzsche.txt"
         :origin "https://s3.amazonaws.com/text-datasets/nietzsche.txt"))
 
@@ -23,7 +24,8 @@
 
 (setv chars (sorted (list (set text))))
 (print "total chars (unique characters in input text):" (len chars))
-(setv char_indices (dict (lfor i (enumerate chars) (, (last i) (first i)))))
+;;(setv char_indices (dict (lfor i (enumerate chars) (, (last i) (first i)))))
+(setv char_indices (dict (lfor i (enumerate chars) #((get i -1) (get i 0)))))
 (setv indices_char (dict (lfor i (enumerate chars) i)))
 
 ;; cut the text in semi-redundant sequences of maxlen characters
@@ -62,7 +64,7 @@
   (setv probas (np.random.multinomial 1 preds 1))
   (np.argmax probas))
 
-(defn on_epoch_end [epoch &optional not-used]
+(defn on_epoch_end [epoch [not-used None]]
   (print)
   (print "----- Generating text after Epoch:" epoch)
   (setv start_index (random.randint 0 (- (len text) maxlen 1)))
@@ -77,8 +79,9 @@
       (setv x_pred (np.zeros [1 maxlen (len chars)]))
       (for [[t char] (lfor j (enumerate sentence) j)]
         (setv (get x_pred 0 t (get char_indices char)) 1))
-      (setv preds (first (model.predict x_pred :verbose 0)))
-      (print "** preds=" preds)
+;;      (setv preds (first (model.predict x_pred :verbose 0)))
+      (setv preds (get (model.predict x_pred :verbose 0) 0))
+      ;;;(print "** preds=" preds)
       (setv next_index (sample preds diversity))
       (setv next_char (get indices_char next_index))
       (setv sentence (+ (cut sentence 1) next_char))

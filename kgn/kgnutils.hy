@@ -1,9 +1,9 @@
 #!/usr/bin/env hy
 
-(import [sparql [dbpedia-sparql]])
-(import [colorize [colorize-sparql]])
+(import sparql [dbpedia-sparql])
+(import colorize [colorize-sparql])
 
-(import [pprint [pprint]])
+(import pprint [pprint])
 
 (defn dbpedia-get-entities-by-name [name dbpedia-type]
   (setv sparql
@@ -13,3 +13,9 @@
   (dbpedia-sparql sparql))
 
 ;;(pprint (dbpedia-get-entities-by-name "Bill Gates" "<http://dbpedia.org/ontology/Person>"))
+
+(defn first [a-list]
+  (get a-list 0))
+
+(defn second [a-list]
+  (get a-list 1))

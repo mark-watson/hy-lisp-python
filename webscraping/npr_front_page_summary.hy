@@ -1,7 +1,7 @@
 #!/usr/bin/env hy
 
-(import [get-web-page [get-web-page-from-disk]])
-(import [bs4 [BeautifulSoup]])
+(import get-web-page [get-web-page-from-disk])
+(import bs4 [BeautifulSoup])
 
 ;; you need to run 'make data' to fetch sample HTML data for dev and testing
 
@@ -12,7 +12,7 @@
   (setv filtered-a
     (lfor e all-anchor-elements
           :if (> (len (.get-text e)) 0)
-          (, (.get e "href") (.get-text e))))
+          #((.get e "href") (.get-text e))))
   filtered-a)
 
 (defn create-npr-summary []
@@ -20,5 +20,5 @@
   (setv filtered-links (lfor [uri text] links :if (> (len (.strip text)) 40) (.strip text)))
   (.join "\n\n" filtered-links))
 
-(if (= __name__ "__main__")
+(when (= __name__ "__main__")
   (print (create-npr-summary)))

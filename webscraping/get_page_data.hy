@@ -1,8 +1,8 @@
 #!/usr/bin/env hy
 
-(import [get_web_page [get-raw-data-from-web]])
+(import get_web_page [get-raw-data-from-web])
 
-(import [bs4 [BeautifulSoup]])
+(import bs4 [BeautifulSoup])
 
 (defn get-element-data [anElement]
   {"text" (.getText anElement)

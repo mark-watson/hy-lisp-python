@@ -1,6 +1,9 @@
-(import [PyInquirer [style_from_dict Token prompt Separator]])
+;; from collections.abc import Mapping
+(import collections.abc [Mapping])
 
-(import [pprint [pprint]])
+(import PyInquirer [style_from_dict Token prompt Separator])
+
+(import pprint [pprint])
 
 (defn select-entities [people places organizations]
   (setv choices [])
@@ -24,12 +27,12 @@
           }
          ]
         )
-  (prompt questions))
+  (prompt.prompt questions))
 
 (defn get-query []
   (get
-    (prompt [{"type" "input"
-              "name" "query"
-              "message" "Enter a list of entities:"}])
+    (prompt.prompt [{"type" "input"
+                     "name" "query"
+                     "message" "Enter a list of entities:"}])
     "query"))
 

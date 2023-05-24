@@ -1,11 +1,9 @@
 #!/usr/bin/env hy
 
-(import [sqlite-lib [create-db connection query]])
+(import sqlite-lib [create-db connection query])
 
 (defn test_sqlite-lib []
-  (setv dbpath ":memory:")
-  (create-db dbpath)
-  (setv conn (connection ":memory:"))
+  (setv conn (connection ":memory:")) ;; "test.db"))
   (query conn "CREATE TABLE people (name TEXT, email TEXT);")
   (print
     (query conn "INSERT INTO people VALUES ('Mark', 'mark@markwatson.com')"))

@@ -1,11 +1,10 @@
 #!/usr/bin/env hy
 
-;; snippet by HN user volent:
+;; snippet by HN user volent and modifed for
+;; Hy 0.26.0 with a comment from stackoverflow user plokstele:
 
-(import [flask [Flask]])
+(import flask [Flask])
 (setv app (Flask "Flask test"))
-(with-decorator (app.route "/")
-  (defn index []
-    "Hello World !"))
+(defn [(.route app "/")] index [] "Hello World !")
 (app.run)
 

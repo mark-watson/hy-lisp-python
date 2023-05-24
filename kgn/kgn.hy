@@ -2,11 +2,12 @@
 
 (import os)
 (import sys)
-(import [pprint [pprint]])
+(import pprint [pprint])
+(require hyrule [assoc])
 
-(import [textui [select-entities get-query]])
-(import [kgnutils [dbpedia-get-entities-by-name]])
-(import [relationships [entity-results->relationship-links]])
+(import textui [select-entities get-query])
+(import kgnutils [dbpedia-get-entities-by-name first second])
+(import relationships [entity-results->relationship-links])
 
 (import spacy)
 
@@ -22,7 +23,7 @@
         (setv (get ret etype) (+ (get ret etype) [ename]))
         (assoc ret etype [ename])))
   ret)
-        
+
 
 ;;(print (entities-in-text "Bill Clinton, Canada, IBM, San Diego, Florida, Great Lakes, Bill Gates, Pepsi, John Smith, Google"))
 
@@ -45,7 +46,7 @@
   (while
     True
     (setv query (get-query))
-    (if (or (= query "quit") (= query "q"))
+    (when (or (= query "quit") (= query "q"))
         (break))
     (setv elist (entities-in-text query))
     (setv people-found-on-dbpedia [])
@@ -59,11 +60,11 @@
         (setv dbp (dbpedia-get-entities-by-name name type-uri))
         (for [d dbp]
           (setv short-comment (shorten-comment (second (second d)) (second (first d))))
-          (if (= key "PERSON")
+          (when (= key "PERSON")
               (.extend people-found-on-dbpedia [(+ name  " || " short-comment)]))
-          (if (= key "GPE")
+          (when (= key "GPE")
               (.extend places-found-on-dbpedia [(+ name  " || " short-comment)]))
-          (if (= key "ORG")
+          (when (= key "ORG")
               (.extend organizations-found-on-dbpedia [(+ name  " || " short-comment)])))))
     (setv user-selected-entities
           (select-entities
@@ -73,7 +74,7 @@
     (print "****** user-selected-entities") (pprint user-selected-entities)
     (setv uri-list [])
     (for [entity (get user-selected-entities "entities")]
-      (setv short-comment (cut entity (+ 4 (.index entity " || "))))
+      (setv short-comment (cut entity (+ 4 (.index entity " || ")) (len entity)))
       (.extend uri-list [(get short-comment-to-uri short-comment)]))
     (setv relation-data (entity-results->relationship-links uri-list))
     (print "\nDiscovered relationship links:")
