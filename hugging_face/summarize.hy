@@ -1,6 +1,4 @@
-(import h5py)
 (import transformers [pipeline])
-
 
 (setv
   summarizer
