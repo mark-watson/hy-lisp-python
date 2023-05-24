@@ -5,7 +5,7 @@
   (setv cursor (conn.cursor))
   [conn cursor])
 
-(defn query [cursor sql &optional variable-bindings]
+(defn query [cursor sql [variable-bindings None]]
   (if variable-bindings
     (cursor.execute sql variable-bindings)
     (cursor.execute sql)))

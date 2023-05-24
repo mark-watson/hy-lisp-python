@@ -4,7 +4,7 @@
 (import os.path [splitext exists])
 (import spacy)
 
-(setv nlp-model (spacy.load "en"))
+(setv nlp-model (spacy.load "en_core_web_sm"))
 
 (defn find-entities-in-text [some-text]
   (defn clean [s]

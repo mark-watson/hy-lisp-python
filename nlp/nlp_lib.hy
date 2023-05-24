@@ -1,6 +1,6 @@
 #!/usr/bin/env hy
 
-(import argparse os)
+;;(import argparse os)
 
 (import spacy)
 
@@ -14,5 +14,5 @@
   j)
  
 ;; tests:
-(print (nlp "President George Bush went to Mexico and he had a very good meal"))
-(print (nlp "Lucy threw a ball to Bill and he caught it"))
+;;(print (nlp "President George Bush went to Mexico and he had a very good meal"))
+;;(print (nlp "Lucy threw a ball to Bill and he caught it"))
