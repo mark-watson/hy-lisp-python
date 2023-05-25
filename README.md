@@ -8,7 +8,7 @@ Hy 0.26.0 using CPython(main) 3.11.0 on Darwin
 => 
 ```
 
-A new version of my Hy book will be released Friday May 26, 2023.
+A new version of my Hy book  rseleased Thusrday May 25, 2023.
 
 
 You can purchase the book at [leanpub](https://leanpub.com/hy-lisp-python) or read the book online for free. I offer free updates to new editions to all of my books purchased on leanpub.
