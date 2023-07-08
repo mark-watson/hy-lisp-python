@@ -22,4 +22,4 @@
   (llm prompt_text))
 
 (print (get_country_information "Germany"))
-
+;; (print (get_country_information "Canada"))
