@@ -11,9 +11,10 @@
       :messages
       [{"role" "user"
         "content" query
-       }]))
+        }]))
   (get
     (get (get (get completion "choices") 0) "message")
     "content"))
 
 ;; (print (completion "how to fix leaky faucet?"))
+
