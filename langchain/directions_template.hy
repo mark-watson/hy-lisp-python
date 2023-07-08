@@ -16,6 +16,6 @@
     (print "\n" prompt_text ":")
     (llm prompt_text))
 
-;; (print (get_directions "get to the store"))
-;; (print (get_directions "hang a picture on the wall"))
+(print (get_directions "get to the store"))
+(print (get_directions "hang a picture on the wall"))
 
