@@ -19,4 +19,4 @@
      (requests.request "POST" API_URL  :headers headers :data data))
    (json.loads (response.content.decode "utf-8")))
 
-;;(print (query "John Smith bought a car. [MASK] drives it fast."))
+(print (query "John Smith bought a car. [MASK] drives it fast."))

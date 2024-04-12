@@ -1,13 +1,16 @@
 (import langchain.text_splitter [CharacterTextSplitter])
-(import langchain.vectorstores [Chroma])
-(import langchain.embeddings [OpenAIEmbeddings])
-(import langchain.document_loaders [DirectoryLoader])
-(import langchain [OpenAI VectorDBQA])
+(import langchain_community.vectorstores [Chroma])
+;;(import langchain.embeddings [OpenAIEmbeddings])
+(import langchain_openai.embeddings [OpenAIEmbeddings])
+(import langchain_community.document_loaders [DirectoryLoader UnstructuredMarkdownLoader])
+(import langchain.chains [VectorDBQA])
+(import langchain_openai.llms [OpenAI])
 
 (setv embeddings (OpenAIEmbeddings))
 
-(setv loader (DirectoryLoader "./data/" :glob "**/*.txt"))
+(setv loader (DirectoryLoader "./data/" :glob "**/*.txt" :loader_cls UnstructuredMarkdownLoader))
 (setv documents (loader.load))
+(print documents)
 
 (setv
   text_splitter

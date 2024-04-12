@@ -1,5 +1,5 @@
 (import langchain.prompts [PromptTemplate])
-(import langchain.llms [OpenAI])
+(import langchain_openai.llms [OpenAI])
 
 (setv llm (OpenAI :temperature 0.9))
 
