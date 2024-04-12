@@ -40,8 +40,8 @@
   (.append next_chars (get text (+ i maxlen))))
 
 (print "Vectorization...")
-(setv x (np.zeros [(len sentences) maxlen (len chars)] :dtype np.bool))
-(setv y (np.zeros [(len sentences) (len chars)] :dtype np.bool))
+(setv x (np.zeros [(len sentences) maxlen (len chars)] :dtype bool))
+(setv y (np.zeros [(len sentences) (len chars)] :dtype bool))
 (for [[i sentence] (lfor j (enumerate sentences) j)]
   (for [[t char] (lfor j (enumerate sentence) j)]
     (setv (get x i t (get char_indices char)) 1))
