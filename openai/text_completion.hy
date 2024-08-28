@@ -3,18 +3,20 @@
 
 (setv openai.api_key (os.environ.get "OPENAI_KEY"))
 
-(defn completion [query]
+(setv client (openai.OpenAI))
+
+(defn completion [query] ; return a Completion object
   (setv
     completion
-    (openai.ChatCompletion.create
-      :model "gpt-3.5-turbo"
+    (client.chat.completions.create
+      :model "gpt-4o-mini"
       :messages
       [{"role" "user"
         "content" query
         }]))
-  (get
-    (get (get (get completion "choices") 0) "message")
-    "content"))
+  (print completion)
+  (get completion.choices 0))
 
-;; (print (completion "how to fix leaky faucet?"))
+(setv x (completion "how to fix leaky faucet?"))
 
+(print x.message.content)

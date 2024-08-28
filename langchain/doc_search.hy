@@ -1,6 +1,5 @@
 (import langchain.text_splitter [CharacterTextSplitter])
 (import langchain_community.vectorstores [Chroma])
-;;(import langchain.embeddings [OpenAIEmbeddings])
 (import langchain_openai.embeddings [OpenAIEmbeddings])
 (import langchain_community.document_loaders [DirectoryLoader UnstructuredMarkdownLoader])
 (import langchain.chains [VectorDBQA])
