@@ -9,9 +9,12 @@
   (setv test-html (get-web-page-from-disk "democracynow_home_page.html"))
   (setv bs (BeautifulSoup test-html :features "lxml"))
   (setv all-anchor-elements (.findAll bs "a"))
+  (print all-anchor-elements)
   (lfor e all-anchor-elements
           :if (> (len (.get-text e)) 0)
-          (, (.get e "href") (.get-text e))))
+          [(.get e "href") (.get-text e)]))
+
+(print (get-democracy-now-links))
 
 (when (= __name__ "__main__")
   (for [[uri text] (get-democracy-now-links)]

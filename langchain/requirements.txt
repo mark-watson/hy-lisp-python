@@ -1,0 +1,7 @@
+hy
+langchain
+langchain_openai
+langchain_community
+unstructured
+markdown
+chromadb
