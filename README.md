@@ -1,6 +1,6 @@
 # Code for my book "A Lisp Programmer Living in Python-Land: The Hy Programming Language"
 
-The code examples have been updated in May 2024 to run with Hy version hy-0.28.0:
+The code examples have been updated in September 2024 to run with Hy version 1.0 (hy-1.0.0)
 
 ## Code examples
 
