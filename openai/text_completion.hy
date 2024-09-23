@@ -6,16 +6,13 @@
 (setv client (openai.OpenAI))
 
 (defn completion [query] ; return a Completion object
-  (setv
-    completion
-    (client.chat.completions.create
-      :model "gpt-4o-mini"
-      :messages
-      [{"role" "user"
-        "content" query
-        }]))
-  (print completion)
-  (get completion.choices 0))
+  (let [completion (client.chat.completions.create
+                     :model "gpt-4o-mini"
+                     :messages
+                       [{"role" "user"
+                         "content" query}])]
+    ;;(print completion)
+    (get completion.choices 0)))
 
 (setv x (completion "how to fix leaky faucet?"))
 
