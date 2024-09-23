@@ -1,0 +1,5 @@
+hy
+transformers
+requests
+tensorflow
+tf-keras
