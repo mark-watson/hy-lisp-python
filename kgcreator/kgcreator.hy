@@ -12,8 +12,8 @@
 (defn find-entities-in-text [some-text]
   (defn clean [s]
     (.strip (.replace s "\n" " ")))
-  (setv doc (nlp-model some-text))
-  (map list (lfor entity doc.ents [(clean entity.text) entity.label_])))
+  (let [doc (nlp-model some-text)]
+    (map list (lfor entity doc.ents [(clean entity.text) entity.label_]))))
 
 (defn data2Rdf [meta-data entities fout]
   (for [[value abbreviation] entities]
@@ -50,13 +50,13 @@
   
   (defn modify-entity-names [ename]
     (.replace ename "the " ""))
-  
-  (setv [txt meta] (read-data txt-path meta-path))
-  (setv entities (find-entities-in-text txt))
-  (setv entities ;; only operate on a few entity types
+
+  (let [[txt meta] (read-data txt-path meta-path)
+        entities (find-entities-in-text txt)
+        entities ;; only operate on a few entity types
         (lfor [e t] entities
               :if (in t ["NORP" "ORG" "PRODUCT" "GPE" "PERSON" "LOC"])
-              [(modify-entity-names e) t]))
-  (data2Rdf meta entities frdf))
+              [(modify-entity-names e) t])]
+    (data2Rdf meta entities frdf)))
 
 (process-directory "test_data" "output.rdf")
