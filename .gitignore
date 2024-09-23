@@ -9,3 +9,5 @@ __pycache__
 
 .lsp
 
+venv
+.vscode
