@@ -9,8 +9,8 @@
   (let [completion (client.chat.completions.create
                      :model "gpt-4o-mini"
                      :messages
-                       [{"role" "user"
-                         "content" query}])]
+                     [{"role" "user"
+                       "content" query}])]
     ;;(print completion)
     (get completion.choices 0)))
 
