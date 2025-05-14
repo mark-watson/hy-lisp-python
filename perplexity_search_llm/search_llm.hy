@@ -28,7 +28,7 @@
   (setv choices-list (. response choices))
   (setv first-choice (get choices-list 0))
   (setv message-object-result (. first-choice message))
-  (setv content-string (. message-object-result content)) ; <--- Error expected here if the previous traceback was misleading
+  (setv content-string (. message-object-result content))
   ;;(print content-string)
   content-string)
 
