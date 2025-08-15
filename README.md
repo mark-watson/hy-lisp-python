@@ -1,8 +1,12 @@
 # Code for my book "A Lisp Programmer Living in Python-Land: The Hy Programming Language"
 
-The code examples have been updated in September 2024 to run with Hy version 1.0 (hy-1.0.0)
+## !! NOTE: this repository is no longer used. Book examples are now in: https://github.com/mark-watson/hy-lisp-python-book !!
+
+I combined both the book manuscipt and code examples in a single repostory.
 
 ## Code examples
+
+The code examples have been updated in September 2024 to run with Hy version 1.0 (hy-1.0.0)
 
 I am in the process of adding new examples (mostly LLM) and deprecating old examples. The old examples will be moved to the directory **OLD_EXAMPLES_NO_LONGER_IN_BOOK** and removed from the book.
 
